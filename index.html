@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>José Lugo | Linktree PRO</title>
+  <meta name="description" content="Productos, negocio y contacto directo con José Lugo. Accede a productos, oportunidad de negocio, redes sociales y WhatsApp desde una sola página premium." />
+  <style>
+    :root{
+      --bg:#09090d;
+      --bg2:#111118;
+      --card:rgba(255,255,255,.045);
+      --line:rgba(255,255,255,.09);
+      --gold:#d4af37;
+      --gold2:#f3d77a;
+      --text:#f7f7fb;
+      --muted:#b6b6c4;
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+      --radius:24px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 25%),
+        radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 18%),
+        linear-gradient(180deg, #06060a 0%, #0b0b11 45%, #0d0d14 100%);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(100% - 32px, var(--max));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(16px);
+      background:rgba(8,8,12,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;
+    }
+    .brand{display:flex;flex-direction:column}
+    .brand strong{font-size:1rem}
+    .brand span{font-size:.84rem;color:var(--muted)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted)}
+    .nav-links a:hover{color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;
+      border:1px solid transparent;transition:.2s;cursor:pointer;text-align:center
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#17120a;
+      box-shadow:0 12px 30px rgba(212,175,55,.24)
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,.03);
+      border-color:rgba(255,255,255,.11)
+    }
+    .hero{padding:72px 0 36px}
+    .hero-grid{
+      display:grid;grid-template-columns:1.12fr .88fr;gap:22px;align-items:stretch;
+    }
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-card{padding:38px;position:relative;overflow:hidden}
+    .hero-card:after{
+      content:"";position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;
+      background:radial-gradient(circle, rgba(212,175,55,.2), transparent 70%);
+      pointer-events:none;
+    }
+    .eyebrow{
+      display:inline-flex;padding:8px 14px;border-radius:999px;
+      background:rgba(212,175,55,.1);
+      border:1px solid rgba(212,175,55,.22);
+      color:var(--gold2);font-size:.86rem;font-weight:800;margin-bottom:18px;
+    }
+    h1,h2,h3{margin:0 0 14px}
+    h1{font-size:clamp(2.1rem, 4.2vw, 4.4rem);line-height:1.02;letter-spacing:-.03em}
+    h2{font-size:clamp(1.45rem, 2.2vw, 2.2rem);line-height:1.1}
+    h3{font-size:1.08rem;line-height:1.2}
+    .lead{font-size:1.08rem;color:var(--muted);max-width:60ch;margin-bottom:24px}
+    .hero-actions,.cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .mini-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px
+    }
+    .mini-card,.link-card,.card,.contact-card{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:20px;
+    }
+    .mini-card{padding:16px}
+    .mini-card strong{display:block;margin-bottom:4px}
+    .mini-card span{color:var(--muted);font-size:.93rem}
+    .side-card{padding:30px;display:flex;flex-direction:column;justify-content:space-between}
+    .profile-box{
+      padding:22px;border-radius:20px;border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(212,175,55,.12), rgba(255,255,255,.02));
+      margin-bottom:18px;
+    }
+    .avatar{
+      width:76px;height:76px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+      font-size:1.6rem;font-weight:900;color:#17120a;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      margin-bottom:14px;
+    }
+    .side-card p,.card p,.link-card p,.contact-card p{color:var(--muted);margin:0}
+    section{padding:26px 0}
+    .section-head{margin-bottom:18px;max-width:78ch}
+    .links-grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+    }
+    .link-card{
+      padding:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+      transition:.2s;
+    }
+    .link-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.28)}
+    .link-content strong{display:block;font-size:1.05rem;margin-bottom:4px}
+    .arrow{
+      width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+      background:rgba(212,175,55,.12);color:var(--gold2);font-weight:900;flex:none;
+    }
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{padding:24px}
+    .cta{
+      padding:28px;
+      display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+      background:
+        radial-gradient(circle at right, rgba(212,175,55,.18), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);
+    }
+    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .contact-card{padding:22px}
+    .contact-card small{
+      display:block;color:var(--gold2);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px
+    }
+    .contact-card strong{display:block;margin-bottom:8px}
+    footer{padding:28px 0 50px;color:var(--muted)}
+    .footer-box{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+      padding-top:18px;border-top:1px solid var(--line)
+    }
+    .whatsapp-float{
+      position:fixed;right:18px;bottom:18px;z-index:60;
+      width:64px;height:64px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#17120a;font-size:1.35rem;font-weight:900;
+      box-shadow:0 18px 40px rgba(212,175,55,.32);
+      border:1px solid rgba(255,255,255,.15)
+    }
+    @media (max-width:960px){
+      .hero-grid,.links-grid,.grid-3,.contact-grid{grid-template-columns:1fr}
+      .mini-grid{grid-template-columns:1fr}
+      .nav{flex-direction:column;align-items:flex-start}
+      .nav-links{width:100%}
+    }
+    @media (max-width:640px){
+      .hero{padding-top:40px}
+      .hero-card,.side-card,.card,.contact-card,.cta{padding:22px}
+      .btn{width:100%}
+      .hero-actions,.cta-actions{width:100%}
+      .whatsapp-float{width:58px;height:58px;right:14px;bottom:14px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <strong>José Lugo</strong>
+        <span>Networker y estratega de oportunidades</span>
+      </div>
+
+      <nav class="nav-links" aria-label="principal">
+        <a href="#accesos">Accesos</a>
+        <a href="#rutas">Rutas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">
+        WhatsApp Directo
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="panel hero-card">
+          <div class="eyebrow">Linktree PRO</div>
+          <h1>Productos, negocio y contacto directo en un solo lugar.</h1>
+          <p class="lead">
+            Esta página centraliza tu marca personal como networker. Desde aquí puedes llevar tráfico hacia productos,
+            oportunidad de negocio, redes sociales y contacto directo por WhatsApp con una apariencia premium.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="negocio.html">Ver Oportunidad de Negocio</a>
+            <a class="btn btn-secondary" href="productos.html">Ver Productos</a>
+            <a class="btn btn-secondary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20productos%20y%20negocio." target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <strong>Productos</strong>
+              <span>Presenta opciones de valor y abre conversaciones con intención.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Negocio</strong>
+              <span>Muestra la oportunidad con video, estructura y enfoque comercial.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Captación</strong>
+              <span>Dirige el tráfico a formularios, WhatsApp y seguimiento real.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel side-card">
+          <div>
+            <div class="profile-box">
+              <div class="avatar">JL</div>
+              <h2>José Lugo</h2>
+              <p>Networker, mentor y estratega de oportunidades. Esta bio page está pensada para vender, reclutar y conectar rápido.</p>
+            </div>
+          </div>
+
+          <div class="grid-3" style="grid-template-columns:1fr;gap:14px;">
+            <div class="mini-card">
+              <strong>WhatsApp Colombia</strong>
+              <span>+57 312 638 7467</span>
+            </div>
+            <div class="mini-card">
+              <strong>WhatsApp Venezuela</strong>
+              <span>+58 422 024 7885</span>
+            </div>
+            <div class="mini-card">
+              <strong>Instagram oficial</strong>
+              <span>@joselugoofficial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="accesos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Accesos principales</h2>
+          <p>Estos botones están organizados para que el visitante elija rápido si quiere negocio, productos, redes o contacto directo.</p>
+        </div>
+
+        <div class="links-grid">
+          <a class="link-card" href="negocio.html">
+            <div class="link-content">
+              <strong>Oportunidad de Negocio</strong>
+              <p>Presentación premium del negocio, videos, formulario y filtro de prospectos.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+
+          <a class="link-card" href="productos.html">
+            <div class="link-content">
+              <strong>Productos</strong>
+              <p>Sección enfocada en mostrar productos, beneficios y llamadas a la acción.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+
+          <a class="link-card" href="sobre-mi.html">
+            <div class="link-content">
+              <strong>Sobre Mí</strong>
+              <p>Espacio para reforzar tu autoridad, tu historia y tu enfoque como networker.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+
+          <a class="link-card" href="contacto.html">
+            <div class="link-content">
+              <strong>Contacto Directo</strong>
+              <p>Canales oficiales para que te escriban sin perderse en la navegación.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+
+          <a class="link-card" href="https://instagram.com/joselugoofficial" target="_blank" rel="noopener noreferrer">
+            <div class="link-content">
+              <strong>Instagram Oficial</strong>
+              <p>Contenido visual, presencia diaria y validación de marca personal.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+
+          <a class="link-card" href="https://tiktok.com/@joselugocoach" target="_blank" rel="noopener noreferrer">
+            <div class="link-content">
+              <strong>TikTok Oficial</strong>
+              <p>Videos cortos, alcance orgánico y contenido para atraer tráfico.</p>
+            </div>
+            <div class="arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="rutas">
+      <div class="container">
+        <div class="section-head">
+          <h2>Rutas estratégicas</h2>
+          <p>La idea es que cada visitante entre por una intención clara: comprar, emprender o hablar contigo directamente.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>Ruta 1: Quiero productos</h3>
+            <p>Ideal para quienes quieren conocer alternativas, recibir información y avanzar hacia una compra guiada.</p>
+          </article>
+          <article class="card">
+            <h3>Ruta 2: Quiero emprender</h3>
+            <p>Perfecta para prospectos que desean entender la oportunidad y evaluar si encajan en el negocio.</p>
+          </article>
+          <article class="card">
+            <h3>Ruta 3: Quiero orientación directa</h3>
+            <p>Diseñada para personas que prefieren ir directo a WhatsApp y recibir atención personalizada.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Usa esta página como tu enlace principal</h2>
+            <p>Comparte solo un link y desde aquí distribuyes el tráfico hacia negocio, productos, Instagram, TikTok y contacto directo.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">WhatsApp Colombia</a>
+            <a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">WhatsApp Venezuela</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contacto y canales oficiales</h2>
+          <p>Deja visibles tus puntos de entrada principales para que la persona no tenga fricción al escribirte.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <small>WhatsApp Colombia</small>
+            <strong>+57 312 638 7467</strong>
+            <p>Canal principal para ventas, reclutamiento y seguimiento.</p>
+          </div>
+
+          <div class="contact-card">
+            <small>WhatsApp Venezuela</small>
+            <strong>+58 422 024 7885</strong>
+            <p>Canal alternativo para prospectos y clientes desde Venezuela.</p>
+          </div>
+
+          <div class="contact-card">
+            <small>Instagram</small>
+            <strong>@joselugoofficial</strong>
+            <p>Validación social, contenido visual y presencia de marca.</p>
+          </div>
+
+          <div class="contact-card">
+            <small>Correo</small>
+            <strong>clerigman@gmail.com</strong>
+            <p>Canal alternativo para consultas y coordinación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
+      <div>
+        <strong>José Lugo</strong><br>
+        <span>Networker y estratega de oportunidades.</span>
+      </div>
+      <div>
+        <a href="https://instagram.com/joselugoofficial" target="_blank" rel="noopener noreferrer">Instagram</a>
+        &nbsp;•&nbsp;
+        <a href="https://tiktok.com/@joselugocoach" target="_blank" rel="noopener noreferrer">TikTok</a>
+        &nbsp;•&nbsp;
+        <a href="mailto:clerigman@gmail.com">Correo</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    W
+  </a>
+</body>
+</html>
