@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos | José Lugo</title>
+  <meta name="description" content="Conoce los productos con José Lugo. Mira el video, explora la propuesta y contáctame por WhatsApp." />
+  <style>
+    :root{
+      --bg:#09090d;
+      --bg2:#111118;
+      --card:rgba(255,255,255,.045);
+      --line:rgba(255,255,255,.09);
+      --gold:#d4af37;
+      --gold2:#f3d77a;
+      --text:#f7f7fb;
+      --muted:#b6b6c4;
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+      --radius:24px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 25%),
+        radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 18%),
+        linear-gradient(180deg, #06060a 0%, #0b0b11 45%, #0d0d14 100%);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(100% - 32px, var(--max));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(16px);
+      background:rgba(8,8,12,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0}
+    .brand{display:flex;flex-direction:column}
+    .brand strong{font-size:1rem}
+    .brand span{font-size:.84rem;color:var(--muted)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted)}
+    .nav-links a:hover{color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;
+      border:1px solid transparent;transition:.2s;cursor:pointer;text-align:center
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#17120a;box-shadow:0 12px 30px rgba(212,175,55,.24)}
+    .btn-secondary{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.11)}
+    .btn-ghost{background:transparent;border-color:rgba(212,175,55,.35)}
+    .hero{padding:72px 0 28px}
+    .hero-grid,.grid-3,.contact-grid{display:grid;gap:18px}
+    .hero-grid{grid-template-columns:1.15fr .85fr}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .contact-grid{grid-template-columns:repeat(2,1fr)}
+    .panel,.card,.contact-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .hero-card{padding:38px;position:relative;overflow:hidden}
+    .hero-card:after{
+      content:"";position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;
+      background:radial-gradient(circle, rgba(212,175,55,.2), transparent 70%);
+    }
+    .eyebrow{
+      display:inline-flex;padding:8px 14px;border-radius:999px;
+      background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.22);
+      color:var(--gold2);font-size:.86rem;font-weight:800;margin-bottom:18px;
+    }
+    h1,h2,h3{margin:0 0 14px}
+    h1{font-size:clamp(2.1rem, 4.2vw, 4.4rem);line-height:1.02;letter-spacing:-.03em}
+    h2{font-size:clamp(1.45rem, 2.2vw, 2.2rem);line-height:1.1}
+    h3{font-size:1.08rem;line-height:1.2}
+    .lead,.section-head p,.card p,.contact-card p,.side-card p{color:var(--muted)}
+    .lead{font-size:1.08rem;max-width:62ch;margin-bottom:24px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .side-card{padding:30px}
+    .checklist{display:grid;gap:12px;margin-top:12px}
+    .check{
+      padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);color:var(--muted)
+    }
+    section{padding:26px 0}
+    .section-head{margin-bottom:18px;max-width:78ch}
+    .video-wrap{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:24px
+    }
+    .video{
+      position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);background:#000
+    }
+    .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .video-bar{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+      padding-top:18px
+    }
+    .card,.contact-card{padding:24px}
+    .cta{
+      display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+      padding:28px;border-radius:24px;border:1px solid var(--line);box-shadow:var(--shadow);
+      background:
+        radial-gradient(circle at right, rgba(212,175,55,.18), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .cta p{margin:0;color:var(--muted);max-width:62ch}
+    .contact-card small{
+      display:block;color:var(--gold2);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px
+    }
+    .contact-card strong{display:block;margin-bottom:8px}
+    footer{padding:28px 0 50px;color:var(--muted)}
+    .footer-box{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+      padding-top:18px;border-top:1px solid var(--line)
+    }
+    .whatsapp-float{
+      position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#17120a;font-size:1.35rem;font-weight:900;box-shadow:0 18px 40px rgba(212,175,55,.32);
+      border:1px solid rgba(255,255,255,.15)
+    }
+    @media (max-width:960px){
+      .hero-grid,.grid-3,.contact-grid{grid-template-columns:1fr}
+      .nav{flex-direction:column;align-items:flex-start}
+      .nav-links{width:100%}
+    }
+    @media (max-width:640px){
+      .hero{padding-top:40px}
+      .hero-card,.side-card,.card,.contact-card,.video-wrap,.cta{padding:22px}
+      .btn{width:100%}
+      .hero-actions{width:100%}
+      .whatsapp-float{width:58px;height:58px;right:14px;bottom:14px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <strong>José Lugo</strong>
+        <span>Networker y estratega de oportunidades</span>
+      </div>
+      <nav class="nav-links" aria-label="principal">
+        <a href="index.html">Inicio</a>
+        <a href="#video">Video</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20los%20productos." target="_blank" rel="noopener noreferrer">WhatsApp Directo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="panel hero-card">
+          <div class="eyebrow">Productos</div>
+          <h1>Muestra los productos con una página más visual, clara y convincente.</h1>
+          <p class="lead">Aquí el visitante puede ver un video centrado en productos, entender mejor la propuesta y pasar directamente a una conversación contigo por WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#video">Ver video ahora</a>
+            <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
+            <a class="btn btn-ghost" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20vi%20la%20p%C3%A1gina%20de%20productos%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">Consultar</a>
+          </div>
+        </div>
+
+        <div class="panel side-card">
+          <h2>Qué logra esta página</h2>
+          <p>Organiza mejor la presentación de los productos, refuerza credibilidad y evita mandar todo el tráfico directamente a un chat sin contexto.</p>
+          <div class="checklist">
+            <div class="check">Video de producto incrustado y listo para mostrar valor.</div>
+            <div class="check">Diseño premium que armoniza con tu página principal.</div>
+            <div class="check">Botones visibles para consulta y cierre por WhatsApp.</div>
+            <div class="check">Navegación conectada con el index y la página de negocio.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="container">
+        <div class="section-head">
+          <h2>Descubre los productos en video</h2>
+          <p>Esta integración hace que el visitante vea mejor la propuesta antes de escribirte, lo que mejora la calidad de las conversaciones.</p>
+        </div>
+
+        <div class="video-wrap">
+          <div class="video">
+            <iframe src="https://www.youtube.com/embed/XsDwxei34o0" title="Productos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="video-bar">
+            <div style="color:var(--muted)">La idea es que el video haga el trabajo visual y el botón haga el trabajo comercial.</div>
+            <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20ya%20vi%20el%20video%20de%20productos%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">Quiero más información</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Por qué esta página funciona mejor</h2>
+          <p>Ayuda a que la persona llegue más informada y con más intención de compra o consulta.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Mejor presentación</h3>
+            <p>El producto luce más serio dentro de un entorno visual premium y coherente con tu marca.</p>
+          </article>
+          <article class="card">
+            <h3>Más interés</h3>
+            <p>El video despierta curiosidad y reduce la fricción antes de que la persona te escriba.</p>
+          </article>
+          <article class="card">
+            <h3>Más cierres</h3>
+            <p>Con botones claros y WhatsApp visible, el paso hacia la conversación es más natural.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>¿Quieres conocer más sobre los productos?</h2>
+            <p>Después de ver el video, entra a WhatsApp y te explico opciones, beneficios y cómo avanzar.</p>
+          </div>
+          <div class="hero-actions" style="margin:0">
+            <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20los%20productos." target="_blank" rel="noopener noreferrer">WhatsApp Colombia</a>
+            <a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20los%20productos." target="_blank" rel="noopener noreferrer">WhatsApp Venezuela</a>
+          </div>
+        </div>
+
+        <div class="contact-grid" style="margin-top:18px">
+          <div class="contact-card">
+            <small>Instagram</small>
+            <strong>@joselugoofficial</strong>
+            <p>Ideal para reforzar presencia, testimonios y contenido visual.</p>
+          </div>
+          <div class="contact-card">
+            <small>Correo</small>
+            <strong>clerigman@gmail.com</strong>
+            <p>Canal alternativo para consultas o seguimiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
+      <div>
+        <strong>José Lugo</strong><br>
+        <span>Negocio, productos y contacto directo en un solo lugar.</span>
+      </div>
+      <div>
+        <a href="index.html">Inicio</a>
+        &nbsp;•&nbsp;
+        <a href="negocio.html">Negocio</a>
+        &nbsp;•&nbsp;
+        <a href="https://instagram.com/joselugoofficial" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">W</a>
+</body>
+</html>
