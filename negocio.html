@@ -3,315 +3,447 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oportunidad de Negocio | José Lugo</title>
-  <meta name="description" content="Conoce la oportunidad de negocio con José Lugo. Mira los videos explicativos, solicita información, deja tus datos y conecta por WhatsApp." />
+  <title>Negocio | José Lugo</title>
+  <meta name="description" content="Conoce la oportunidad de negocio con José Lugo. Mira el video, recibe un regalo estratégico y da el siguiente paso con acompañamiento directo." />
   <style>
-    :root{--bg:#0a0a0f;--card:#171722;--gold:#d4af37;--gold-2:#f4d77b;--text:#f5f5f7;--muted:#b6b6c2;--line:rgba(255,255,255,.08);--shadow:0 20px 50px rgba(0,0,0,.35);--radius:22px;--max:1180px}
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:radial-gradient(circle at top right, rgba(212,175,55,.12), transparent 28%),radial-gradient(circle at top left, rgba(255,255,255,.05), transparent 18%),linear-gradient(180deg,#08080d 0%,#0b0b12 38%,#0d0d14 100%);color:var(--text);line-height:1.6}
-    a{text-decoration:none;color:inherit} img{max-width:100%;display:block}
-    .container{width:min(100% - 32px, var(--max));margin-inline:auto}
-    .topbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(8,8,13,.72);border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
-    .brand{display:flex;flex-direction:column;gap:2px}.brand strong{font-size:1rem}.brand span{font-size:.83rem;color:var(--muted)}
-    .nav-links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.nav-links a{color:var(--muted);font-size:.95rem}.nav-links a:hover{color:var(--text)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;border:1px solid transparent;font-weight:700;transition:.2s;cursor:pointer;text-align:center}
+    :root{
+      --bg:#09090d;
+      --line:rgba(255,255,255,.09);
+      --gold:#d4af37;
+      --gold2:#f3d77a;
+      --text:#f7f7fb;
+      --muted:#b6b6c4;
+      --shadow:0 20px 50px rgba(0,0,0,.35);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 25%),
+        radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 18%),
+        linear-gradient(180deg,#06060a 0%,#0b0b11 45%,#0d0d14 100%);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(100% - 32px, var(--max));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter:blur(16px);
+      background:rgba(8,8,12,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;
+    }
+    .brand{display:flex;flex-direction:column}
+    .brand strong{font-size:1rem}
+    .brand span{font-size:.84rem;color:var(--muted)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted)}
+    .nav-links a:hover{color:var(--text)}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;
+      border:1px solid transparent;transition:.2s;cursor:pointer;text-align:center
+    }
     .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);color:#17120a;box-shadow:0 12px 30px rgba(212,175,55,.24)}
-    .btn-secondary{background:rgba(255,255,255,.03);color:var(--text);border-color:rgba(255,255,255,.12)}
-    .btn-ghost{background:transparent;color:var(--text);border-color:rgba(212,175,55,.45)}
-    .hero{padding:68px 0 30px}
-    .hero-grid,.two-col,.grid-3,.process,.contact-grid{display:grid;gap:18px}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#17120a;
+      box-shadow:0 12px 30px rgba(212,175,55,.24)
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,.03);
+      border-color:rgba(255,255,255,.11)
+    }
+    .btn-ghost{
+      background:transparent;
+      border-color:rgba(212,175,55,.35)
+    }
+    .hero{padding:72px 0 28px}
+    .hero-grid,.grid-3,.contact-grid,.two-col,.form-grid{display:grid;gap:18px}
     .hero-grid{grid-template-columns:1.15fr .85fr}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .contact-grid{grid-template-columns:repeat(2,1fr)}
     .two-col{grid-template-columns:1.1fr .9fr}
-    .grid-3,.process{grid-template-columns:repeat(3,1fr)}
-    .contact-grid{grid-template-columns:1fr 1fr}
-    .panel,.card,.step,.contact-item{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .hero-card{padding:38px;position:relative;overflow:hidden}
-    .hero-card::before{content:"";position:absolute;inset:auto -60px -60px auto;width:180px;height:180px;background:radial-gradient(circle,rgba(212,175,55,.24),transparent 70%)}
-    .eyebrow{display:inline-flex;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.22);color:var(--gold-2);font-size:.86rem;font-weight:700;margin-bottom:18px}
-    h1,h2,h3{margin:0 0 14px} h1{font-size:clamp(2rem,4vw,4rem);line-height:1.05;letter-spacing:-.03em} h2{font-size:clamp(1.5rem,2vw,2.2rem);line-height:1.1} h3{font-size:1.15rem;line-height:1.2}
-    .lead,.section-head p,.card p,.step p,.contact-item p,.gift-box p,.side-card p,.video-caption p,.mini-item span,.check-list li span,.form-note{color:var(--muted)}
+    .form-grid{grid-template-columns:1fr 1fr;gap:14px}
+    .panel,.card,.contact-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+    }
+    .hero-card,.side-card,.gift-box,.form-card,.video-wrap,.cta{padding:28px}
+    .hero-card{position:relative;overflow:hidden}
+    .hero-card:after{
+      content:"";position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;
+      background:radial-gradient(circle, rgba(212,175,55,.2), transparent 70%);
+    }
+    .eyebrow,.gift-badge{
+      display:inline-flex;padding:8px 14px;border-radius:999px;
+      background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.22);
+      color:var(--gold2);font-size:.86rem;font-weight:800;margin-bottom:18px;
+    }
+    h1,h2,h3{margin:0 0 14px}
+    h1{font-size:clamp(2.1rem, 4.2vw, 4.4rem);line-height:1.02;letter-spacing:-.03em}
+    h2{font-size:clamp(1.45rem, 2.2vw, 2.2rem);line-height:1.1}
+    h3{font-size:1.08rem;line-height:1.2}
+    .lead,.section-head p,.card p,.contact-card p,.side-card p,.gift-box p,.form-note,.video-bar div{color:var(--muted)}
     .lead{font-size:1.08rem;max-width:62ch;margin-bottom:24px}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0 24px}
-    .mini-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-    .mini-item{padding:16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
-    .mini-item strong{display:block;margin-bottom:5px;font-size:.96rem}
-    .inline-video-card,.gift-box,.form-card,.video-wrap,.side-card,.cta{padding:26px}
-    .inline-video-card{margin-top:22px;border-radius:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
-    .side-card{display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(180deg,rgba(212,175,55,.12),rgba(255,255,255,.02)),linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02))}
-    .side-card .kicker,.contact-item small,.gift-badge{color:var(--gold-2);font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
-    .check-list{display:grid;gap:12px;margin:22px 0 0;padding:0;list-style:none}
-    .check-list li{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);padding:14px 15px;border-radius:16px}
-    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--gold),var(--gold-2));margin-top:7px;flex:none;box-shadow:0 0 0 5px rgba(212,175,55,.12)}
-    section{padding:26px 0}.section-head{margin-bottom:18px;max-width:78ch}
-    .video-shell{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;border:1px solid rgba(255,255,255,.08);box-shadow:var(--shadow);background:#000}
-    .video-shell iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .video-caption{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
-    .card,.step,.contact-item{padding:24px}
-    .step-number{display:inline-flex;width:44px;height:44px;border-radius:14px;align-items:center;justify-content:center;font-weight:900;color:#17120a;background:linear-gradient(135deg,var(--gold),var(--gold-2));margin-bottom:16px}
-    .gift-box{background:radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 28%),linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))}
-    .gift-badge{display:inline-flex;padding:8px 14px;border-radius:999px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.22);margin-bottom:16px}
-    .gift-list{margin:16px 0 0;padding-left:18px;color:var(--muted)}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .field,.field-full{display:flex;flex-direction:column;gap:8px}.field-full{grid-column:1/-1}
-    label{font-size:.92rem;font-weight:700}
-    input,select,textarea{width:100%;min-height:52px;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);outline:none;font:inherit}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .checklist{display:grid;gap:12px;margin-top:12px}
+    .check,.chip{
+      padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);color:var(--muted)
+    }
+    section{padding:26px 0}
+    .section-head{margin-bottom:18px;max-width:78ch}
+    .video{
+      position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;
+      border:1px solid rgba(255,255,255,.08);background:#000
+    }
+    .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .video-bar{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+      padding-top:18px
+    }
+    .card,.contact-card{padding:24px}
+    .gift-list{margin:16px 0 0;padding-left:20px;color:var(--muted)}
+    .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .field,.field-full{display:flex;flex-direction:column;gap:8px}
+    .field-full{grid-column:1/-1}
+    label{font-weight:800}
+    input,select,textarea{
+      width:100%;min-height:52px;padding:14px 16px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font:inherit
+    }
     textarea{min-height:118px;resize:vertical}
-    input::placeholder,textarea::placeholder{color:#8e8e9f}
-    .small-chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--muted);font-size:.88rem}
-    .status-box{margin-top:14px;padding:14px 16px;border-radius:16px;border:1px solid rgba(212,175,55,.18);background:rgba(212,175,55,.07);color:var(--gold-2);display:none}
-    .cta{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;background:radial-gradient(circle at right, rgba(212,175,55,.18), transparent 28%),linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02))}
-    .cta p{margin:0;color:var(--muted);max-width:62ch}.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
-    footer{padding:26px 0 50px;color:var(--muted)} .footer-box{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--line)}
-    .whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#17120a;box-shadow:0 18px 40px rgba(212,175,55,.32);font-size:1.4rem;font-weight:900;border:1px solid rgba(255,255,255,.15)}
-    @media (max-width:980px){.hero-grid,.two-col,.grid-3,.process,.contact-grid,.form-grid{grid-template-columns:1fr}.mini-list{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start}.nav-links{width:100%;justify-content:flex-start}}
-    @media (max-width:640px){.hero{padding-top:38px}.hero-card,.side-card,.video-wrap,.cta,.card,.step,.contact-item,.gift-box,.form-card{padding:22px}.btn{width:100%}.hero-actions,.cta-actions{width:100%}.whatsapp-float{width:58px;height:58px;right:14px;bottom:14px}}
+    .status-box{
+      margin-top:14px;padding:14px 16px;border-radius:16px;border:1px solid rgba(212,175,55,.18);
+      background:rgba(212,175,55,.07);color:var(--gold2);display:none
+    }
+    .cta{
+      display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+      background:
+        radial-gradient(circle at right, rgba(212,175,55,.18), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    }
+    .cta p{margin:0;color:var(--muted);max-width:62ch}
+    .contact-card small{
+      display:block;color:var(--gold2);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px
+    }
+    .contact-card strong{display:block;margin-bottom:8px}
+    footer{padding:28px 0 50px;color:var(--muted)}
+    .footer-box{
+      display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+      padding-top:18px;border-top:1px solid var(--line)
+    }
+    .whatsapp-float{
+      position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#17120a;font-size:1.35rem;font-weight:900;box-shadow:0 18px 40px rgba(212,175,55,.32);
+      border:1px solid rgba(255,255,255,.15)
+    }
+    @media (max-width:980px){
+      .hero-grid,.grid-3,.contact-grid,.two-col,.form-grid{grid-template-columns:1fr}
+      .nav{flex-direction:column;align-items:flex-start}
+      .nav-links{width:100%}
+    }
+    @media (max-width:640px){
+      .hero{padding-top:40px}
+      .hero-card,.side-card,.card,.contact-card,.video-wrap,.cta,.gift-box,.form-card{padding:22px}
+      .btn{width:100%}
+      .hero-actions{width:100%}
+      .whatsapp-float{width:58px;height:58px;right:14px;bottom:14px}
+    }
   </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="container nav">
-    <div class="brand"><strong>José Lugo</strong><span>Networker y estratega de oportunidades</span></div>
-    <nav class="nav-links" aria-label="principal">
-      <a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="negocio.html">Negocio</a><a href="sobre-mi.html">Sobre Mí</a><a href="contacto.html">Contacto</a>
-    </nav>
-    <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20oportunidad%20de%20negocio." target="_blank" rel="noopener noreferrer">WhatsApp Directo</a>
-  </div>
-</header>
-
-<main>
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="panel hero-card">
-      <div class="eyebrow">Oportunidad de Negocio</div>
-      <h1>Construye ingresos, crecimiento y expansión con una visión clara.</h1>
-      <p class="lead">Esta página está diseñada para personas que no solo quieren conocer productos, sino también explorar una oportunidad real para emprender, crecer en ventas, desarrollar liderazgo y avanzar con acompañamiento directo.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20conocer%20la%20oportunidad%20de%20negocio." target="_blank" rel="noopener noreferrer">Quiero conocer el negocio</a>
-        <a class="btn btn-secondary" href="#video-negocio">Ver video explicativo</a>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <strong>José Lugo</strong>
+        <span>Bienestar, acompañamiento y oportunidad real</span>
       </div>
+      <nav class="nav-links" aria-label="principal">
+        <a href="index.html">Inicio</a>
+        <a href="#video">Video</a>
+        <a href="#leads">Registro</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20la%20oportunidad%20de%20negocio." target="_blank" rel="noopener noreferrer">WhatsApp Directo</a>
+    </div>
+  </header>
 
-      <div class="inline-video-card">
-        <h3>Conoce los productos en video</h3>
-        <p>En lugar del botón de productos, aquí tienes un video estratégico para mostrar el valor de la propuesta y elevar el interés antes del contacto.</p>
-        <div class="video-shell">
-          <iframe src="https://www.youtube.com/embed/XsDwxei34o0" title="Productos One More" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="panel hero-card">
+          <div class="eyebrow">Oportunidad de Negocio</div>
+          <h1>Si necesitas una nueva fuente de ingresos, mira esto con atención.</h1>
+          <p class="lead">
+            Muchas personas sienten presión económica, ganas de emprender o necesidad de comenzar algo propio, pero no encuentran una opción clara. Aquí puedes ver el modelo, entenderlo mejor y evaluar si encaja contigo.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#video">Ver video ahora</a>
+            <a class="btn btn-secondary" href="#leads">Quiero el regalo</a>
+            <a class="btn btn-ghost" href="imc.html">Haz tu valoración gratuita</a>
+          </div>
+        </div>
+
+        <div class="panel side-card">
+          <h2>¿Qué te llevarás de esta página?</h2>
+          <p>
+            Una explicación más clara, una forma de dejar tus datos con intención real y una ruta directa para hablar conmigo si esta oportunidad te hace sentido.
+          </p>
+          <div class="checklist">
+            <div class="check">Video explicativo para entender el negocio sin enredos.</div>
+            <div class="check">Regalo estratégico para abrir la conversación con valor.</div>
+            <div class="check">Filtro para identificar personas más comprometidas.</div>
+            <div class="check">Acceso directo a WhatsApp y valoración gratuita.</div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="mini-list">
-        <div class="mini-item"><strong>Venta de productos</strong><span>Una ruta práctica para comenzar con enfoque comercial.</span></div>
-        <div class="mini-item"><strong>Construcción de red</strong><span>Desarrolla equipo, liderazgo y expansión estratégica.</span></div>
-        <div class="mini-item"><strong>Acompañamiento</strong><span>Orientación directa para que avances con mayor claridad.</span></div>
-      </div>
-    </div>
+    <section id="video">
+      <div class="container">
+        <div class="section-head">
+          <h2>Mira cómo funciona esta oportunidad</h2>
+          <p>
+            Ve el video pensando en tu situación actual: lo que necesitas producir, el tiempo que deseas recuperar y el tipo de oportunidad que te gustaría construir.
+          </p>
+        </div>
 
-    <div class="panel side-card">
-      <div>
-        <div class="kicker">José Lugo</div>
-        <h2>Negocio, visión y crecimiento en una sola ruta</h2>
-        <p>Si estás buscando una oportunidad que combine productos, expansión y desarrollo personal, aquí tienes una puerta de entrada clara para entender el modelo y decidir tu siguiente paso.</p>
-      </div>
-      <ul class="check-list">
-        <li><div class="dot"></div><span>Ideal para quienes quieren generar ingresos adicionales.</span></li>
-        <li><div class="dot"></div><span>Pensado para personas con mentalidad de crecimiento.</span></li>
-        <li><div class="dot"></div><span>Perfecto para quienes desean emprender con acompañamiento.</span></li>
-        <li><div class="dot"></div><span>Una opción para desarrollar ventas, red y liderazgo.</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-head">
-      <h2>¿Para quién es esta oportunidad?</h2>
-      <p>Para personas que quieren comenzar algo propio, crear ingresos, desarrollar una visión comercial y avanzar con una estructura de negocio que combine productos y expansión.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card"><h3>Para quienes quieren emprender</h3><p>Si deseas comenzar con una propuesta clara y una guía práctica, esta oportunidad puede ser tu punto de partida.</p></article>
-      <article class="card"><h3>Para quienes buscan ingresos adicionales</h3><p>Explora una vía para monetizar tu tiempo, tu influencia y tu capacidad comercial con mayor intención.</p></article>
-      <article class="card"><h3>Para quienes quieren crecer en equipo</h3><p>Desarrolla liderazgo, visión de red y una estructura que te permita crecer acompañado.</p></article>
-    </div>
-  </div>
-</section>
-
-<section id="video-negocio">
-  <div class="container">
-    <div class="section-head">
-      <h2>Mira cómo funciona el negocio</h2>
-      <p>Aquí tienes una explicación visual del modelo. Este video te ayudará a entender mejor la propuesta, el enfoque del negocio y por qué puede ser una oportunidad para ti.</p>
-    </div>
-    <div class="panel video-wrap">
-      <div class="video-shell">
-        <iframe src="https://www.youtube.com/embed/Q2qhgyUifiU" title="Plan de compensación One More" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-      <div class="video-caption">
-        <p>Este video puede cambiar tu forma de ver el negocio. Si lo que viste conecta contigo, el siguiente paso es escribirme para explicarte cómo empezar según tu perfil.</p>
-        <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20vi%20el%20video%20del%20negocio%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">Vi el video, quiero información</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="leads">
-  <div class="container">
-    <div class="section-head">
-      <h2>Recibe el regalo y filtra prospectos con intención real</h2>
-      <p>Aquí combinamos dos objetivos: capturar el lead y segmentar a la persona antes de hablar contigo. El visitante puede registrarse para recibir el PDF <strong>Plan de 3 días para desinflamar y activar tu metabolismo</strong> y también solicitar una muestra gratis si realmente está comprometido.</p>
-    </div>
-
-    <div class="two-col">
-      <div class="panel gift-box">
-        <div class="gift-badge">Regalo estratégico</div>
-        <h2>PDF de regalo + muestra gratis</h2>
-        <p>En vez de atraer solo curiosos, esta sección funciona como filtro inteligente. La persona deja sus datos, define su ciudad, su capacidad de inversión y su objetivo, y eso te permite priorizar mejor los contactos.</p>
-        <p>Además, puedes usar este lead magnet como primer paso de conversación: <strong>“Plan de 3 días para desinflamar y activar tu metabolismo”.</strong></p>
-        <ul class="gift-list">
-          <li>Captura el interés con una promesa útil y concreta.</li>
-          <li>Segmenta al prospecto con 3 campos clave.</li>
-          <li>Dirige el contacto al WhatsApp correcto según el país.</li>
-          <li>Abre la puerta para la muestra gratis solo a personas comprometidas.</li>
-        </ul>
-        <div class="small-chip-row">
-          <span class="chip">Ciudad</span><span class="chip">Capacidad de inversión</span><span class="chip">Objetivo</span><span class="chip">Filtro de compromiso</span>
+        <div class="panel video-wrap">
+          <div class="video">
+            <iframe src="https://www.youtube.com/embed/Q2qhgyUifiU" title="Oportunidad de negocio" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="video-bar">
+            <div>
+              Si lo que viste te hizo sentido, este es el mejor momento para pedir más detalles y no dejar pasar la oportunidad otra vez.
+            </div>
+            <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20ya%20vi%20el%20video%20del%20negocio%20y%20quiero%20m%C3%A1s%20detalles." target="_blank" rel="noopener noreferrer">Quiero más detalles</a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="panel form-card">
-        <h3>Solicita el PDF y deja tus datos</h3>
-        <p class="lead" style="font-size:1rem;margin-bottom:18px;">Completa este formulario. Al enviarlo, se abrirá WhatsApp con tu lead estructurado para que no pierdas información en la conversación.</p>
+    <section id="leads">
+      <div class="container">
+        <div class="section-head">
+          <h2>Recibe un regalo útil y da el primer paso con ventaja</h2>
+          <p>
+            Si te interesa mejorar tu bienestar o comenzar una conversación con más claridad, aquí puedes registrarte para recibir el PDF <strong>Plan de 3 días para desinflamar y activar tu metabolismo</strong> y, si lo deseas, solicitar una muestra gratis.
+          </p>
+        </div>
 
-        <form id="leadForm">
-          <div class="form-grid">
-            <div class="field"><label for="nombre">Nombre completo</label><input id="nombre" type="text" placeholder="Ej. María González" required /></div>
-            <div class="field"><label for="telefono">Teléfono</label><input id="telefono" type="tel" placeholder="Ej. +57 300 000 0000" required /></div>
-            <div class="field"><label for="ciudad">Ciudad</label><input id="ciudad" type="text" placeholder="Ej. Medellín / Maracay" required /></div>
-            <div class="field"><label for="pais">País / mercado</label>
-              <select id="pais" required><option value="">Selecciona una opción</option><option value="Colombia">Colombia</option><option value="Venezuela">Venezuela</option><option value="Otro">Otro</option></select>
+        <div class="two-col">
+          <div class="panel gift-box">
+            <div class="gift-badge">Regalo estratégico</div>
+            <h2>Empieza con valor, no con dudas</h2>
+            <p>
+              En lugar de quedarte con la curiosidad o seguir posponiendo una decisión, aquí puedes recibir una guía práctica, dejar tus datos y abrir una conversación con más intención.
+            </p>
+            <p>
+              Este recurso está pensado para personas que quieren verse mejor, sentirse mejor o explorar una nueva opción con información más clara desde el principio.
+            </p>
+            <ul class="gift-list">
+              <li>Recibes un contenido útil que te ayuda a tomar acción rápida.</li>
+              <li>Puedes solicitar una muestra gratis si realmente quieres avanzar.</li>
+              <li>Nos permite darte una respuesta más precisa según tu ciudad, objetivo y nivel de interés.</li>
+            </ul>
+
+            <div class="chip-row">
+              <span class="chip">Ciudad</span>
+              <span class="chip">Capacidad de inversión</span>
+              <span class="chip">Objetivo</span>
+              <span class="chip">Filtro de compromiso</span>
             </div>
-            <div class="field"><label for="inversion">Capacidad de inversión</label>
-              <select id="inversion" required><option value="">Selecciona una opción</option><option value="Aún no tengo capital">Aún no tengo capital</option><option value="Baja">Baja</option><option value="Media">Media</option><option value="Alta">Alta</option></select>
-            </div>
-            <div class="field"><label for="objetivo">Objetivo principal</label>
-              <select id="objetivo" required><option value="">Selecciona una opción</option><option value="Quiero productos">Quiero productos</option><option value="Quiero bajar de peso / desinflamar">Quiero bajar de peso / desinflamar</option><option value="Quiero emprender">Quiero emprender</option><option value="Quiero ingresos adicionales">Quiero ingresos adicionales</option><option value="Quiero negocio y productos">Quiero negocio y productos</option></select>
-            </div>
-            <div class="field"><label for="muestra">¿Solicitas una muestra gratis?</label>
-              <select id="muestra" required><option value="">Selecciona una opción</option><option value="Sí, y soy una persona comprometida">Sí, y soy una persona comprometida</option><option value="No por ahora, solo quiero el PDF">No por ahora, solo quiero el PDF</option></select>
-            </div>
-            <div class="field-full"><label for="mensaje">Mensaje adicional</label><textarea id="mensaje" placeholder="Cuéntame brevemente qué estás buscando o qué te interesa más."></textarea></div>
           </div>
 
-          <div class="hero-actions" style="margin-bottom:0;">
-            <button type="submit" class="btn btn-primary">Quiero el PDF y registrarme</button>
-            <a class="btn btn-secondary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20solicitar%20una%20muestra%20gratis%20y%20recibir%20el%20PDF." target="_blank" rel="noopener noreferrer">Solicita una muestra gratis</a>
-          </div>
+          <div class="panel form-card">
+            <h3>Solicita el PDF y deja tus datos</h3>
+            <p class="form-note">
+              Completa este formulario y el sistema abrirá WhatsApp con tu información organizada para continuar la conversación sin perder tiempo.
+            </p>
 
-          <p class="form-note">Esta versión en GitHub Pages deja el lead estructurado en WhatsApp y además lo guarda localmente en el navegador. Si luego quieres almacenamiento permanente, se puede conectar a Google Sheets o a un formulario externo.</p>
-          <div id="statusBox" class="status-box"></div>
-        </form>
+            <form id="leadForm">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="nombre">Nombre completo</label>
+                  <input id="nombre" type="text" placeholder="Ej. María González" required />
+                </div>
+                <div class="field">
+                  <label for="telefono">Teléfono</label>
+                  <input id="telefono" type="tel" placeholder="Ej. +57 300 000 0000" required />
+                </div>
+                <div class="field">
+                  <label for="ciudad">Ciudad</label>
+                  <input id="ciudad" type="text" placeholder="Ej. Medellín / Maracay" required />
+                </div>
+                <div class="field">
+                  <label for="pais">País / mercado</label>
+                  <select id="pais" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="inversion">Capacidad de inversión</label>
+                  <select id="inversion" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Aún no tengo capital">Aún no tengo capital</option>
+                    <option value="Baja">Baja</option>
+                    <option value="Media">Media</option>
+                    <option value="Alta">Alta</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="objetivo">Objetivo principal</label>
+                  <select id="objetivo" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Quiero productos">Quiero productos</option>
+                    <option value="Quiero bajar de peso / desinflamar">Quiero bajar de peso / desinflamar</option>
+                    <option value="Quiero emprender">Quiero emprender</option>
+                    <option value="Quiero ingresos adicionales">Quiero ingresos adicionales</option>
+                    <option value="Quiero negocio y productos">Quiero negocio y productos</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="muestra">¿Solicitas una muestra gratis?</label>
+                  <select id="muestra" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Sí, quiero una muestra gratis">Sí, quiero una muestra gratis</option>
+                    <option value="Solo quiero el PDF por ahora">Solo quiero el PDF por ahora</option>
+                  </select>
+                </div>
+                <div class="field-full">
+                  <label for="mensaje">Mensaje adicional</label>
+                  <textarea id="mensaje" placeholder="Cuéntame brevemente qué te interesa más o qué estás buscando."></textarea>
+                </div>
+              </div>
+
+              <div class="hero-actions" style="margin-top:18px">
+                <button type="submit" class="btn btn-primary">Quiero el PDF y registrarme</button>
+                <a class="btn btn-secondary" href="imc.html">Haz tu valoración gratuita</a>
+              </div>
+
+              <div id="statusBox" class="status-box"></div>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section>
-  <div class="container">
-    <div class="section-head">
-      <h2>¿Qué puedes desarrollar aquí?</h2>
-      <p>Esta oportunidad no se limita a una sola vía. Puedes avanzar desde la venta directa hasta la construcción de una red con visión de crecimiento.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card"><h3>Generación de ingresos</h3><p>Comienza con una ruta comercial clara y enfócate en resultados reales según tu ritmo y tu meta.</p></article>
-      <article class="card"><h3>Venta de productos</h3><p>Trabaja con una propuesta que te permita presentar opciones de valor y abrir conversaciones con propósito.</p></article>
-      <article class="card"><h3>Expansión y liderazgo</h3><p>Construye estructura, fortalece tu visión y desarrolla habilidades para crecer con mayor alcance.</p></article>
-    </div>
-  </div>
-</section>
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Aquí no se trata solo de mirar una oportunidad, sino de decidir si este puede ser tu próximo paso</h2>
+          <p>
+            La idea es que salgas de esta página con más claridad, más contexto y una acción concreta para avanzar.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Entiende mejor</h3>
+            <p>El video te ayuda a ver el panorama antes de sacar conclusiones apresuradas.</p>
+          </article>
+          <article class="card">
+            <h3>Actúa con intención</h3>
+            <p>El regalo y el registro convierten la curiosidad en una conversación con más propósito.</p>
+          </article>
+          <article class="card">
+            <h3>Recibe orientación</h3>
+            <p>Puedes escribir, solicitar valoración o avanzar según lo que realmente estés buscando hoy.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <div class="container">
-    <div class="section-head">
-      <h2>Tu ruta para empezar</h2>
-      <p>No necesitas complicarte. El proceso puede comenzar de forma simple, directa y estratégica.</p>
-    </div>
-    <div class="process">
-      <article class="step"><div class="step-number">1</div><h3>Mira los videos</h3><p>Entiende la visión general del modelo y descubre si esta oportunidad conecta contigo.</p></article>
-      <article class="step"><div class="step-number">2</div><h3>Regístrate y filtra tu interés</h3><p>Deja tus datos, recibe el PDF y define ciudad, inversión y objetivo para acelerar la conversación.</p></article>
-      <article class="step"><div class="step-number">3</div><h3>Habla directo por WhatsApp</h3><p>Con claridad y acompañamiento, podrás decidir la mejor forma de comenzar tu proceso.</p></article>
-    </div>
-  </div>
-</section>
+    <section id="contacto">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>¿Quieres hablar sobre esto con más claridad?</h2>
+            <p>
+              Si el video y la información conectaron contigo, ahora puedes escribir, solicitar tu valoración gratuita o dejar tus datos para continuar.
+            </p>
+          </div>
+          <div class="hero-actions" style="margin:0">
+            <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20el%20negocio." target="_blank" rel="noopener noreferrer">WhatsApp Colombia</a>
+            <a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20el%20negocio." target="_blank" rel="noopener noreferrer">WhatsApp Venezuela</a>
+            <a class="btn btn-ghost" href="imc.html">Valoración gratuita</a>
+          </div>
+        </div>
 
-<section>
-  <div class="container">
-    <div class="panel cta">
+        <div class="contact-grid" style="margin-top:18px">
+          <div class="contact-card">
+            <small>Instagram</small>
+            <strong>@joselugoofficial</strong>
+            <p>Refuerza tu confianza viendo contenido, señales y presencia real.</p>
+          </div>
+          <div class="contact-card">
+            <small>Correo</small>
+            <strong>clerigman@gmail.com</strong>
+            <p>Canal alternativo para consultas o seguimiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-box">
       <div>
-        <h2>¿Te gustaría empezar?</h2>
-        <p>Después de ver cómo funciona el negocio y registrar tu interés, el siguiente paso es sencillo: hablar directamente conmigo para orientarte según tu situación, tu meta y tu nivel de compromiso.</p>
+        <strong>José Lugo</strong><br>
+        <span>Bienestar, oportunidad y acompañamiento directo.</span>
       </div>
-      <div class="cta-actions">
-        <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20entrar%20al%20negocio." target="_blank" rel="noopener noreferrer">Quiero entrar al negocio</a>
-        <a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20el%20negocio%20desde%20Venezuela." target="_blank" rel="noopener noreferrer">Contacto Venezuela</a>
-        <a class="btn btn-ghost" href="contacto.html">Ir a Contacto</a>
+      <div>
+        <a href="index.html">Inicio</a>
+        &nbsp;•&nbsp;
+        <a href="productos.html">Productos</a>
+        &nbsp;•&nbsp;
+        <a href="https://instagram.com/joselugoofficial" target="_blank" rel="noopener noreferrer">Instagram</a>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<section>
-  <div class="container">
-    <div class="section-head">
-      <h2>Contacto directo</h2>
-      <p>Si deseas hablar conmigo sobre esta oportunidad, aquí tienes mis canales principales.</p>
-    </div>
-    <div class="contact-grid">
-      <article class="contact-item"><small>WhatsApp Colombia</small><strong>+57 312 638 7467</strong><p>Canal principal para información directa, guía personalizada y siguientes pasos.</p><a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20directa%20sobre%20el%20negocio." target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a></article>
-      <article class="contact-item"><small>WhatsApp Venezuela</small><strong>+58 422 024 7885</strong><p>Canal alternativo para prospectos y clientes que prefieran contacto desde Venezuela.</p><a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20el%20negocio." target="_blank" rel="noopener noreferrer">Contactar en Venezuela</a></article>
-      <article class="contact-item"><small>Instagram</small><strong>@joselugoofficial</strong><p>Presencia diaria, contenido de marca personal y seguimiento visual.</p><a class="btn btn-secondary" href="https://instagram.com/joselugoofficial" target="_blank" rel="noopener noreferrer">Ver Instagram</a></article>
-      <article class="contact-item"><small>Correo</small><strong>clerigman@gmail.com</strong><p>Úsalo si prefieres un canal alternativo para consultas o seguimiento.</p><a class="btn btn-secondary" href="mailto:clerigman@gmail.com?subject=Informaci%C3%B3n%20sobre%20oportunidad%20de%20negocio">Enviar Correo</a></article>
-    </div>
-  </div>
-</section>
-</main>
+  <a class="whatsapp-float" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20negocio." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">W</a>
 
-<footer>
-  <div class="container footer-box">
-    <div><strong>José Lugo</strong><br><span>Networker, mentor y estratega de oportunidades.</span></div>
-    <div><a href="https://instagram.com/joselugoofficial" target="_blank" rel="noopener noreferrer">Instagram</a> &nbsp;•&nbsp; <a href="https://tiktok.com/@joselugocoach" target="_blank" rel="noopener noreferrer">TikTok</a> &nbsp;•&nbsp; <a href="contacto.html">Contacto</a></div>
-  </div>
-</footer>
+  <script>
+    const form = document.getElementById('leadForm');
+    const statusBox = document.getElementById('statusBox');
 
-<a class="whatsapp-float" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20oportunidad%20de%20negocio." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">W</a>
+    function chooseWhatsapp(country){
+      return country === 'Venezuela' ? '584220247885' : '573126387467';
+    }
 
-<script>
-const form=document.getElementById('leadForm');
-const statusBox=document.getElementById('statusBox');
-function chooseWhatsapp(country){return country==='Venezuela'?'584220247885':'573126387467'}
-function escapeText(v){return (v||'').trim()}
-form.addEventListener('submit',function(e){
-  e.preventDefault();
-  const data={
-    nombre:escapeText(document.getElementById('nombre').value),
-    telefono:escapeText(document.getElementById('telefono').value),
-    ciudad:escapeText(document.getElementById('ciudad').value),
-    pais:escapeText(document.getElementById('pais').value),
-    inversion:escapeText(document.getElementById('inversion').value),
-    objetivo:escapeText(document.getElementById('objetivo').value),
-    muestra:escapeText(document.getElementById('muestra').value),
-    mensaje:escapeText(document.getElementById('mensaje').value),
-    fecha:new Date().toISOString()
-  };
-  if(!data.nombre||!data.telefono||!data.ciudad||!data.pais||!data.inversion||!data.objetivo||!data.muestra){
-    statusBox.style.display='block';
-    statusBox.textContent='Completa todos los campos obligatorios para continuar.';
-    return;
-  }
-  const leads=JSON.parse(localStorage.getItem('joseLugoLeads')||'[]');
-  leads.push(data);
-  localStorage.setItem('joseLugoLeads', JSON.stringify(leads));
-  const text=`Hola José Lugo, quiero registrarme para recibir el PDF "Plan de 3 días para desinflamar y activar tu metabolismo".
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const data = {
+        nombre: document.getElementById('nombre').value.trim(),
+        telefono: document.getElementById('telefono').value.trim(),
+        ciudad: document.getElementById('ciudad').value.trim(),
+        pais: document.getElementById('pais').value.trim(),
+        inversion: document.getElementById('inversion').value.trim(),
+        objetivo: document.getElementById('objetivo').value.trim(),
+        muestra: document.getElementById('muestra').value.trim(),
+        mensaje: document.getElementById('mensaje').value.trim()
+      };
+
+      if (!data.nombre || !data.telefono || !data.ciudad || !data.pais || !data.inversion || !data.objetivo || !data.muestra) {
+        statusBox.style.display = 'block';
+        statusBox.textContent = 'Completa todos los campos obligatorios para continuar.';
+        return;
+      }
+
+      const text = `Hola José Lugo, quiero recibir el PDF "Plan de 3 días para desinflamar y activar tu metabolismo".
 
 Nombre: ${data.nombre}
 Teléfono: ${data.telefono}
@@ -323,11 +455,15 @@ Solicita muestra gratis: ${data.muestra}
 Mensaje adicional: ${data.mensaje || 'No indicó'}
 
 Quedo atento(a) al siguiente paso.`;
-  statusBox.style.display='block';
-  statusBox.textContent='Lead capturado en esta sesión. Ahora te redirigimos a WhatsApp para continuar la conversación.';
-  setTimeout(()=>{window.open(`https://wa.me/${chooseWhatsapp(data.pais)}?text=${encodeURIComponent(text)}`,'_blank')},500);
-  form.reset();
-});
-</script>
+
+      statusBox.style.display = 'block';
+      statusBox.textContent = 'Perfecto. Ahora te redirigimos a WhatsApp para continuar.';
+      setTimeout(() => {
+        window.open(`https://wa.me/${chooseWhatsapp(data.pais)}?text=${encodeURIComponent(text)}`, '_blank');
+      }, 500);
+
+      form.reset();
+    });
+  </script>
 </body>
 </html>
