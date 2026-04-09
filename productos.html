@@ -4,12 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Productos | José Lugo</title>
-  <meta name="description" content="Conoce los productos con José Lugo. Mira el video, explora la propuesta y contáctame por WhatsApp." />
+  <meta name="description" content="Conoce los productos con José Lugo. Mira el video, identifica tu necesidad y recibe orientación directa por WhatsApp." />
   <style>
     :root{
       --bg:#09090d;
-      --bg2:#111118;
-      --card:rgba(255,255,255,.045);
       --line:rgba(255,255,255,.09);
       --gold:#d4af37;
       --gold2:#f3d77a;
@@ -28,7 +26,7 @@
       background:
         radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 25%),
         radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 18%),
-        linear-gradient(180deg, #06060a 0%, #0b0b11 45%, #0d0d14 100%);
+        linear-gradient(180deg,#06060a 0%,#0b0b11 45%,#0d0d14 100%);
       line-height:1.6;
     }
     a{text-decoration:none;color:inherit}
@@ -39,7 +37,9 @@
       background:rgba(8,8,12,.72);
       border-bottom:1px solid var(--line);
     }
-    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0}
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;
+    }
     .brand{display:flex;flex-direction:column}
     .brand strong{font-size:1rem}
     .brand span{font-size:.84rem;color:var(--muted)}
@@ -51,9 +51,19 @@
       border:1px solid transparent;transition:.2s;cursor:pointer;text-align:center
     }
     .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#17120a;box-shadow:0 12px 30px rgba(212,175,55,.24)}
-    .btn-secondary{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.11)}
-    .btn-ghost{background:transparent;border-color:rgba(212,175,55,.35)}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#17120a;
+      box-shadow:0 12px 30px rgba(212,175,55,.24)
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,.03);
+      border-color:rgba(255,255,255,.11)
+    }
+    .btn-ghost{
+      background:transparent;
+      border-color:rgba(212,175,55,.35)
+    }
     .hero{padding:72px 0 28px}
     .hero-grid,.grid-3,.contact-grid{display:grid;gap:18px}
     .hero-grid{grid-template-columns:1.15fr .85fr}
@@ -63,7 +73,8 @@
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
     }
-    .hero-card{padding:38px;position:relative;overflow:hidden}
+    .hero-card,.side-card,.video-wrap,.cta{padding:28px}
+    .hero-card{position:relative;overflow:hidden}
     .hero-card:after{
       content:"";position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;
       background:radial-gradient(circle, rgba(212,175,55,.2), transparent 70%);
@@ -77,10 +88,9 @@
     h1{font-size:clamp(2.1rem, 4.2vw, 4.4rem);line-height:1.02;letter-spacing:-.03em}
     h2{font-size:clamp(1.45rem, 2.2vw, 2.2rem);line-height:1.1}
     h3{font-size:1.08rem;line-height:1.2}
-    .lead,.section-head p,.card p,.contact-card p,.side-card p{color:var(--muted)}
+    .lead,.section-head p,.card p,.contact-card p,.side-card p,.video-bar div{color:var(--muted)}
     .lead{font-size:1.08rem;max-width:62ch;margin-bottom:24px}
     .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-    .side-card{padding:30px}
     .checklist{display:grid;gap:12px;margin-top:12px}
     .check{
       padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.03);
@@ -88,10 +98,6 @@
     }
     section{padding:26px 0}
     .section-head{margin-bottom:18px;max-width:78ch}
-    .video-wrap{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:24px
-    }
     .video{
       position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;
       border:1px solid rgba(255,255,255,.08);background:#000
@@ -104,7 +110,6 @@
     .card,.contact-card{padding:24px}
     .cta{
       display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
-      padding:28px;border-radius:24px;border:1px solid var(--line);box-shadow:var(--shadow);
       background:
         radial-gradient(circle at right, rgba(212,175,55,.18), transparent 28%),
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
@@ -144,7 +149,7 @@
     <div class="container nav">
       <div class="brand">
         <strong>José Lugo</strong>
-        <span>Networker y estratega de oportunidades</span>
+        <span>Bienestar, acompañamiento y oportunidad real</span>
       </div>
       <nav class="nav-links" aria-label="principal">
         <a href="index.html">Inicio</a>
@@ -160,23 +165,27 @@
       <div class="container hero-grid">
         <div class="panel hero-card">
           <div class="eyebrow">Productos</div>
-          <h1>Muestra los productos con una página más visual, clara y convincente.</h1>
-          <p class="lead">Aquí el visitante puede ver un video centrado en productos, entender mejor la propuesta y pasar directamente a una conversación contigo por WhatsApp.</p>
+          <h1>Si te has sentido hinchado, sin energía o frustrado con lo que has probado, mira esto.</h1>
+          <p class="lead">
+            Quizás has intentado varias cosas y nada te convence, o simplemente no ves cambios reales. Este video te ayudará a identificar una alternativa distinta y descubrir si puede encajar con lo que hoy estás buscando para tu bienestar.
+          </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#video">Ver video ahora</a>
             <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
-            <a class="btn btn-ghost" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20vi%20la%20p%C3%A1gina%20de%20productos%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">Consultar</a>
+            <a class="btn btn-ghost" href="imc.html">Haz tu valoración gratuita</a>
           </div>
         </div>
 
         <div class="panel side-card">
-          <h2>Qué logra esta página</h2>
-          <p>Organiza mejor la presentación de los productos, refuerza credibilidad y evita mandar todo el tráfico directamente a un chat sin contexto.</p>
+          <h2>¿Qué vas a encontrar aquí?</h2>
+          <p>
+            Una presentación más clara y cercana para que puedas reconocerte en el problema, entender mejor la propuesta y pasar al siguiente paso con más seguridad.
+          </p>
           <div class="checklist">
-            <div class="check">Video de producto incrustado y listo para mostrar valor.</div>
-            <div class="check">Diseño premium que armoniza con tu página principal.</div>
-            <div class="check">Botones visibles para consulta y cierre por WhatsApp.</div>
-            <div class="check">Navegación conectada con el index y la página de negocio.</div>
+            <div class="check">Si te cuesta bajar medidas o desinflamarte, aquí puedes empezar a ver otra opción.</div>
+            <div class="check">Si necesitas algo práctico y fácil de incorporar, este video te dará contexto.</div>
+            <div class="check">Si quieres orientación directa, al final puedes ir a WhatsApp.</div>
+            <div class="check">Si no sabes por dónde comenzar, tienes una valoración gratuita disponible.</div>
           </div>
         </div>
       </div>
@@ -185,16 +194,20 @@
     <section id="video">
       <div class="container">
         <div class="section-head">
-          <h2>Descubre los productos en video</h2>
-          <p>Esta integración hace que el visitante vea mejor la propuesta antes de escribirte, lo que mejora la calidad de las conversaciones.</p>
+          <h2>Descubre si esto puede ser para ti</h2>
+          <p>
+            Mira el video pensando en tu situación actual: cómo te sientes, qué te gustaría cambiar y qué has intentado hasta ahora sin lograr el resultado que esperas.
+          </p>
         </div>
 
-        <div class="video-wrap">
+        <div class="panel video-wrap">
           <div class="video">
             <iframe src="https://www.youtube.com/embed/XsDwxei34o0" title="Productos" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
           <div class="video-bar">
-            <div style="color:var(--muted)">La idea es que el video haga el trabajo visual y el botón haga el trabajo comercial.</div>
+            <div>
+              Si lo que viste te hizo sentido, este es el mejor momento para pedir orientación y no seguir postergándolo.
+            </div>
             <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20ya%20vi%20el%20video%20de%20productos%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">Quiero más información</a>
           </div>
         </div>
@@ -204,21 +217,23 @@
     <section>
       <div class="container">
         <div class="section-head">
-          <h2>Por qué esta página funciona mejor</h2>
-          <p>Ayuda a que la persona llegue más informada y con más intención de compra o consulta.</p>
+          <h2>No se trata solo de ver un producto, sino de encontrar una respuesta</h2>
+          <p>
+            Esta página está pensada para que pases de la curiosidad a la decisión con más claridad.
+          </p>
         </div>
         <div class="grid-3">
           <article class="card">
-            <h3>Mejor presentación</h3>
-            <p>El producto luce más serio dentro de un entorno visual premium y coherente con tu marca.</p>
+            <h3>Reconócete en el problema</h3>
+            <p>Si sientes inflamación, cansancio o frustración con tu proceso, aquí puedes empezar a identificar una salida distinta.</p>
           </article>
           <article class="card">
-            <h3>Más interés</h3>
-            <p>El video despierta curiosidad y reduce la fricción antes de que la persona te escriba.</p>
+            <h3>Entiende antes de comprar</h3>
+            <p>El video te permite ver la propuesta antes de escribir, para que tu decisión tenga más sentido y menos dudas.</p>
           </article>
           <article class="card">
-            <h3>Más cierres</h3>
-            <p>Con botones claros y WhatsApp visible, el paso hacia la conversación es más natural.</p>
+            <h3>Actúa con guía</h3>
+            <p>No tienes que hacerlo solo. Puedes ver el video, hacer tu valoración y luego recibir orientación directa.</p>
           </article>
         </div>
       </div>
@@ -228,12 +243,15 @@
       <div class="container">
         <div class="cta">
           <div>
-            <h2>¿Quieres conocer más sobre los productos?</h2>
-            <p>Después de ver el video, entra a WhatsApp y te explico opciones, beneficios y cómo avanzar.</p>
+            <h2>¿Quieres saber cuál opción puede ajustarse mejor a ti?</h2>
+            <p>
+              Después de ver el video, escríbeme por WhatsApp o haz tu valoración gratuita para darte una recomendación más clara.
+            </p>
           </div>
           <div class="hero-actions" style="margin:0">
             <a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20los%20productos." target="_blank" rel="noopener noreferrer">WhatsApp Colombia</a>
             <a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20informaci%C3%B3n%20sobre%20los%20productos." target="_blank" rel="noopener noreferrer">WhatsApp Venezuela</a>
+            <a class="btn btn-ghost" href="imc.html">Valoración gratuita</a>
           </div>
         </div>
 
@@ -241,7 +259,7 @@
           <div class="contact-card">
             <small>Instagram</small>
             <strong>@joselugoofficial</strong>
-            <p>Ideal para reforzar presencia, testimonios y contenido visual.</p>
+            <p>Ideal para ver contenido, señales de confianza y seguimiento visual.</p>
           </div>
           <div class="contact-card">
             <small>Correo</small>
@@ -257,7 +275,7 @@
     <div class="container footer-box">
       <div>
         <strong>José Lugo</strong><br>
-        <span>Negocio, productos y contacto directo en un solo lugar.</span>
+        <span>Bienestar, oportunidad y acompañamiento directo.</span>
       </div>
       <div>
         <a href="index.html">Inicio</a>
