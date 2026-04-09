@@ -1,225 +1,58 @@
+<!-- REEMPLAZA EL CONTENIDO DE TUS ARCHIVOS CON ESTAS VERSIONES -->
+
+<!-- ========================= index.html ========================= -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>José Lugo | Mentor de negocios digitales y salud</title>
-
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#0a0a0f;
-color:#fff;
-}
-
-.container{
-width:90%;
-max-width:1200px;
-margin:auto;
-}
-
-header{
-background:#000;
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-font-weight:bold;
-font-size:20px;
-}
-
-.hero{
-display:flex;
-flex-wrap:wrap;
-align-items:center;
-padding:60px 0;
-}
-
-.hero img{
-width:100%;
-max-width:500px;
-border-radius:20px;
-}
-
-.hero-text{
-flex:1;
-padding:20px;
-}
-
-h1{
-font-size:40px;
-}
-
-.btn{
-display:inline-block;
-padding:15px 25px;
-margin:10px 10px 0 0;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.btn-primary{
-background:#f7c94b;
-color:#000;
-}
-
-.btn-whatsapp{
-background:#25D366;
-color:#fff;
-}
-
-.section{
-padding:60px 0;
-}
-
-.card{
-background:#111;
-padding:20px;
-border-radius:15px;
-margin:10px;
-flex:1;
-}
-
-.cards{
-display:flex;
-flex-wrap:wrap;
-}
-
-footer{
-text-align:center;
-padding:40px 0;
-color:#aaa;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>José Lugo | Bienestar, negocio y valoración gratuita</title>
+  <meta name="description" content="Conoce productos, oportunidad de negocio, valoración gratuita e información directa con José Lugo desde una sola página premium." />
+  <style>
+    :root{--bg:#09090d;--line:rgba(255,255,255,.09);--gold:#d4af37;--gold2:#f3d77a;--text:#f7f7fb;--muted:#b6b6c4;--shadow:0 20px 50px rgba(0,0,0,.35);--radius:24px;--max:1120px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top right, rgba(212,175,55,.16), transparent 25%),radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 18%),linear-gradient(180deg,#06060a 0%,#0b0b11 45%,#0d0d14 100%);line-height:1.6}
+    a{text-decoration:none;color:inherit}.container{width:min(100% - 32px, var(--max));margin:auto}
+    .topbar{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:rgba(8,8,12,.72);border-bottom:1px solid var(--line)}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0}.brand{display:flex;flex-direction:column}.brand strong{font-size:1rem}.brand span{font-size:.84rem;color:var(--muted)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted)}.nav-links a:hover{color:var(--text)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;font-weight:800;border:1px solid transparent;transition:.2s;cursor:pointer;text-align:center}
+    .btn:hover{transform:translateY(-2px)}.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#17120a;box-shadow:0 12px 30px rgba(212,175,55,.24)}.btn-secondary{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.11)}.btn-ghost{background:transparent;border-color:rgba(212,175,55,.35)}
+    .hero{padding:72px 0 36px}.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:22px;align-items:stretch}.panel{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-card{padding:38px;position:relative;overflow:hidden}.hero-card:after{content:"";position:absolute;right:-50px;bottom:-50px;width:180px;height:180px;background:radial-gradient(circle, rgba(212,175,55,.2), transparent 70%);pointer-events:none}
+    .eyebrow{display:inline-flex;padding:8px 14px;border-radius:999px;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.22);color:var(--gold2);font-size:.86rem;font-weight:800;margin-bottom:18px}
+    h1,h2,h3{margin:0 0 14px}h1{font-size:clamp(2.1rem, 4.2vw, 4.4rem);line-height:1.02;letter-spacing:-.03em}h2{font-size:clamp(1.45rem, 2.2vw, 2.2rem);line-height:1.1}h3{font-size:1.08rem;line-height:1.2}
+    .lead{font-size:1.08rem;color:var(--muted);max-width:60ch;margin-bottom:24px}.hero-actions,.cta-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}.mini-card,.link-card,.card,.contact-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:20px}.mini-card{padding:16px}.mini-card strong{display:block;margin-bottom:4px}.mini-card span{color:var(--muted);font-size:.93rem}
+    .side-card{padding:30px;display:flex;flex-direction:column;justify-content:space-between}.profile-box{padding:22px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(212,175,55,.12), rgba(255,255,255,.02));margin-bottom:18px}
+    .avatar{width:76px;height:76px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:#17120a;background:linear-gradient(135deg,var(--gold),var(--gold2));margin-bottom:14px}
+    .side-card p,.card p,.link-card p,.contact-card p{color:var(--muted);margin:0}section{padding:26px 0}.section-head{margin-bottom:18px;max-width:78ch}
+    .links-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.link-card{padding:22px;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:.2s}.link-card:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.28)}
+    .link-content strong{display:block;font-size:1.05rem;margin-bottom:4px}.arrow{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,.12);color:var(--gold2);font-weight:900;flex:none}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:24px}
+    .cta{padding:28px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:radial-gradient(circle at right, rgba(212,175,55,.18), transparent 28%),linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.contact-card{padding:22px}.contact-card small{display:block;color:var(--gold2);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}.contact-card strong{display:block;margin-bottom:8px}
+    footer{padding:28px 0 50px;color:var(--muted)}.footer-box{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-top:18px;border-top:1px solid var(--line)}
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:60;width:64px;height:64px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#17120a;font-size:1.35rem;font-weight:900;box-shadow:0 18px 40px rgba(212,175,55,.32);border:1px solid rgba(255,255,255,.15)}
+    @media (max-width:960px){.hero-grid,.links-grid,.grid-3,.contact-grid{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start}.nav-links{width:100%}}
+    @media (max-width:640px){.hero{padding-top:40px}.hero-card,.side-card,.card,.contact-card,.cta{padding:22px}.btn{width:100%}.hero-actions,.cta-actions{width:100%}.whatsapp-float{width:58px;height:58px;right:14px;bottom:14px}}
+  </style>
 </head>
-
 <body>
+  <header class="topbar"><div class="container nav"><div class="brand"><strong>José Lugo</strong><span>Bienestar, acompañamiento y oportunidad real</span></div><nav class="nav-links"><a href="#accesos">Accesos</a><a href="#rutas">Rutas</a><a href="#contacto">Contacto</a></nav><a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank">WhatsApp Directo</a></div></header>
+  <main>
+    <section class="hero"><div class="container hero-grid"><div class="panel hero-card"><div class="eyebrow">Acceso principal</div><h1>Empieza aquí y descubre qué opción encaja mejor contigo hoy.</h1><p class="lead">Si estás buscando una forma de sentirte mejor, conocer productos con propósito o evaluar una oportunidad para generar ingresos, aquí tienes una ruta clara para avanzar sin perder tiempo.</p><div class="hero-actions"><a class="btn btn-primary" href="negocio.html">Ver Oportunidad de Negocio</a><a class="btn btn-secondary" href="productos.html">Ver Productos</a><a class="btn btn-ghost" href="imc.html">Haz tu valoración gratuita</a></div><div class="mini-grid"><div class="mini-card"><strong>Productos</strong><span>Opciones pensadas para personas que quieren verse y sentirse mejor con guía clara.</span></div><div class="mini-card"><strong>Negocio</strong><span>Una alternativa para quienes necesitan ingresos y están listos para conocer algo distinto.</span></div><div class="mini-card"><strong>Valoración gratis</strong><span>Da el primer paso con una evaluación rápida y descubre por dónde comenzar.</span></div></div></div><div class="panel side-card"><div class="profile-box"><div class="avatar">JL</div><h2>José Lugo</h2><p>Estoy aquí para ayudarte a identificar la mejor ruta para ti: producto, valoración gratuita u oportunidad de negocio, con acompañamiento directo y respuestas claras.</p></div><div class="mini-grid" style="grid-template-columns:1fr"><div class="mini-card"><strong>WhatsApp Colombia</strong><span>+57 312 638 7467</span></div><div class="mini-card"><strong>WhatsApp Venezuela</strong><span>+58 422 024 7885</span></div><div class="mini-card"><strong>Instagram oficial</strong><span>@joselugoofficial</span></div></div></div></div></section>
+    <section id="accesos"><div class="container"><div class="section-head"><h2>Elige el camino que más se parece a lo que hoy necesitas</h2><p>Desde aquí puedes ir directo a la información que realmente te interesa, sin vueltas y con opciones claras para actuar.</p></div><div class="links-grid"><a class="link-card" href="negocio.html"><div class="link-content"><strong>Quiero conocer la oportunidad</strong><p>Si buscas una manera de generar ingresos o emprender con acompañamiento, entra aquí primero.</p></div><div class="arrow">→</div></a><a class="link-card" href="productos.html"><div class="link-content"><strong>Quiero ver los productos</strong><p>Descubre soluciones enfocadas en bienestar y conoce por qué tantas personas se están interesando.</p></div><div class="arrow">→</div></a><a class="link-card" href="imc.html"><div class="link-content"><strong>Haz tu valoración gratuita</strong><p>Empieza con una evaluación sencilla para entender mejor tu punto de partida y tu objetivo.</p></div><div class="arrow">→</div></a><a class="link-card" href="contacto.html"><div class="link-content"><strong>Quiero hablar directo</strong><p>Si prefieres una orientación personal, entra aquí y conversemos por el canal que te quede mejor.</p></div><div class="arrow">→</div></a><a class="link-card" href="https://instagram.com/joselugoofficial" target="_blank"><div class="link-content"><strong>Instagram Oficial</strong><p>Mira contenido, resultados, estilo de vida y señales de que aquí sí hay seguimiento real.</p></div><div class="arrow">→</div></a><a class="link-card" href="https://tiktok.com/@joselugocoach" target="_blank"><div class="link-content"><strong>TikTok Oficial</strong><p>Ve ideas, mensajes y contenido pensado para despertar interés y mover a la acción.</p></div><div class="arrow">→</div></a></div></div></section>
+    <section id="rutas"><div class="container"><div class="section-head"><h2>No todos llegan por la misma razón, pero aquí sí hay una respuesta para cada necesidad</h2><p>Puede que hoy quieras resolver un problema puntual, encontrar una opción para sentirte mejor o descubrir una oportunidad que te ayude a producir más. Aquí puedes comenzar por la ruta correcta.</p></div><div class="grid-3"><article class="card"><h3>Quiero resultados para mí</h3><p>Si buscas una opción que te ayude a avanzar en bienestar, energía o control de peso, esta es tu entrada.</p></article><article class="card"><h3>Quiero una oportunidad</h3><p>Si necesitas generar ingresos, reinventarte o conocer un modelo distinto, la sección de negocio es para ti.</p></article><article class="card"><h3>Quiero una orientación clara</h3><p>Si aún no sabes por dónde empezar, haz tu valoración gratuita o escríbeme y te ayudo a definir el mejor paso.</p></article></div></div></section>
+    <section><div class="container"><div class="cta"><div><h2>Da el primer paso desde aquí</h2><p>No tienes que buscar en varios lugares ni perder tiempo adivinando qué hacer. Aquí puedes ir directo a productos, oportunidad de negocio, valoración gratuita o contacto personal.</p></div><div class="cta-actions"><a class="btn btn-primary" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank">WhatsApp Colombia</a><a class="btn btn-secondary" href="https://wa.me/584220247885?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank">WhatsApp Venezuela</a><a class="btn btn-ghost" href="imc.html">Valoración gratuita</a></div></div></div></section>
+    <section id="contacto"><div class="container"><div class="section-head"><h2>Contacto y canales oficiales</h2><p>Si lo prefieres, puedes escribirme directamente por el canal que más cómodo te quede.</p></div><div class="contact-grid"><div class="contact-card"><small>WhatsApp Colombia</small><strong>+57 312 638 7467</strong><p>Canal principal para información, seguimiento y cierre.</p></div><div class="contact-card"><small>WhatsApp Venezuela</small><strong>+58 422 024 7885</strong><p>Canal alternativo para prospectos y clientes desde Venezuela.</p></div><div class="contact-card"><small>Instagram</small><strong>@joselugoofficial</strong><p>Contenido visual, validación social y presencia de marca.</p></div><div class="contact-card"><small>Correo</small><strong>clerigman@gmail.com</strong><p>Canal alternativo para consultas y coordinación.</p></div></div></div></section>
+  </main>
+  <footer><div class="container footer-box"><div><strong>José Lugo</strong><br><span>Bienestar, oportunidad y acompañamiento directo.</span></div><div><a href="https://instagram.com/joselugoofficial" target="_blank">Instagram</a> &nbsp;•&nbsp; <a href="https://tiktok.com/@joselugocoach" target="_blank">TikTok</a> &nbsp;•&nbsp; <a href="mailto:clerigman@gmail.com">Correo</a></div></div></footer>
+  <a class="whatsapp-float" href="https://wa.me/573126387467?text=Hola%20Jos%C3%A9%20Lugo,%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank">W</a>
+</body></html>
 
-<header class="container">
-<div class="logo">José Lugo</div>
-<div>Mentor de negocios digitales y salud</div>
-</header>
+<!-- ========================= productos.html ========================= -->
+<!-- Usa la misma base visual y reemplaza tu productos.html por la versión que te envío aparte si la quieres completa -->
 
-<section class="hero container">
-
-<img src="https://scontent-sin11-2.xx.fbcdn.net/v/t39.30808-6/506628082_10229574309569160_4149614996054327970_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=2a1932&_nc_ohc=hAB5Pg_tGoUQ7kNvwGgNBo4&_nc_oc=Ado7OpmbZbUsIyerIyA3V0hnTY3YyLlK9TFA5ZrZWohYnovwlusxcMTGMw5gGjXe8P4&_nc_zt=23&_nc_ht=scontent-sin11-2.xx&_nc_gid=BQEdatUOSObsV2CWBN5Ysg&_nc_ss=7a3a8&oh=00_Af0C3GDlTev-pAdMzgFHkyNQRtPvr-aRP6oowW-d9LkVKw&oe=69DDB0C1">
-
-<div class="hero-text">
-
-<h1>Si quieres mejorar tu bienestar o generar ingresos desde casa, aquí puede comenzar tu cambio</h1>
-
-<p>
-No necesitas tener experiencia. Solo necesitas claridad, dirección y una oportunidad que realmente tenga sentido para ti.
-</p>
-
-<a class="btn btn-primary" href="https://wa.me/573126387467">Ver productos</a>
-<a class="btn btn-whatsapp" href="https://wa.me/584220247885">Ver negocio</a>
-
-</div>
-
-</section>
-
-<section class="section container">
-
-<h2>Opciones para ti</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Bienestar</h3>
-<p>
-Si te sientes cansado, con poca energía o quieres mejorar tu físico, aquí puedes conocer una alternativa que te ayude a avanzar.
-</p>
-</div>
-
-<div class="card">
-<h3>Ingresos</h3>
-<p>
-Si estás buscando una forma de generar dinero desde casa, aquí puedes explorar una opción real con acompañamiento.
-</p>
-</div>
-
-<div class="card">
-<h3>Guía directa</h3>
-<p>
-No tienes que hacerlo solo. Puedes escribir y recibir orientación clara según tu caso.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section container">
-
-<h2>Sobre mí</h2>
-
-<p>
-José Lugo | Mentor de negocios digitales y salud.  
-Ayudo a personas comunes a mejorar su bienestar y generar ingresos reales desde casa, con una guía clara, directa y enfocada en resultados.
-</p>
-
-<a class="btn btn-whatsapp" href="https://wa.me/573126387467">
-Hablar conmigo directamente
-</a>
-
-</section>
-
-<section class="section container">
-
-<h2>Lo que otras personas perciben</h2>
-
-<div class="cards">
-
-<div class="card">
-<p>
-“Entré con dudas y terminé escribiendo porque sentí que había algo real aquí.”
-</p>
-</div>
-
-<div class="card">
-<p>
-“La explicación fue clara y directa. Eso me dio confianza.”
-</p>
-</div>
-
-<div class="card">
-<p>
-“No parece publicidad, se siente más como una oportunidad real.”
-</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="section container">
-
-<h2>Contáctame</h2>
-
-<p>
-Escríbeme y te ayudo a identificar qué encaja mejor contigo.
-</p>
-
-<a class="btn btn-whatsapp" href="https://wa.me/573126387467">
-WhatsApp Colombia
-</a>
-
-<a class="btn btn-primary" href="https://wa.me/584220247885">
-WhatsApp Venezuela
-</a>
-
-</section>
-
-<footer>
-José Lugo · Mentor de negocios digitales y salud  
-Una oportunidad real para quienes quieren avanzar
-</footer>
-
-</body>
-</html>
+<!-- ========================= negocio.html ========================= -->
+<!-- Usa la misma base visual y reemplaza tu negocio.html por la versión que te envío aparte si la quieres completa -->
