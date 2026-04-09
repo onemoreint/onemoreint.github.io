@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jose Lugo · Evaluación de Bienestar</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
+
+  :root {
+    --bg: #0a0d14;
+    --surface: #111520;
+    --surface2: #161b28;
+    --border: rgba(255,255,255,0.07);
+    --accent: #00d4aa;
+    --accent2: #3b82f6;
+    --accent3: #f59e0b;
+    --text: #f0f4ff;
+    --muted: #6b7a99;
+    --danger: #ef4444;
+    --warn: #f59e0b;
+    --good: #00d4aa;
+    --radius: 18px;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════ FONDO ANIMADO ═══════════════ */
+  .bg-orbs {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: 0.12;
+    animation: orbFloat 12s ease-in-out infinite;
+  }
+  .orb1 { width: 500px; height: 500px; background: var(--accent); top: -150px; right: -150px; animation-delay: 0s; }
+  .orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: -100px; animation-delay: -4s; }
+  .orb3 { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 30%; animation-delay: -8s; }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(30px, -40px) scale(1.08); }
+  }
+
+  /* ═══════════════ CONTENEDOR PRINCIPAL ═══════════════ */
+  .app {
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  /* ═══════════════ SCREEN SYSTEM ═══════════════ */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp 0.5s cubic-bezier(.16,1,.3,1); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════ HERO ═══════════════ */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 40px 16px;
+  }
+
+  .logo-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.25);
+    border-radius: 100px; padding: 6px 16px; margin-bottom: 32px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    color: var(--accent); text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 10vw, 88px);
+    line-height: 0.95; letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .hero-title .line1 { color: var(--text); }
+  .hero-title .line2 {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 16px; color: var(--muted); font-weight: 300;
+    max-width: 400px; line-height: 1.6; margin-bottom: 48px;
+  }
+
+  .hero-stats {
+    display: flex; gap: 24px; margin-bottom: 48px; justify-content: center; flex-wrap: wrap;
+  }
+  .stat-pill {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 100px; padding: 8px 20px;
+    font-size: 13px; color: var(--muted);
+  }
+  .stat-pill strong { color: var(--accent); }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--accent), #00b894);
+    color: #0a0d14; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;
+    padding: 18px 40px; border-radius: 100px; border: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 40px rgba(0,212,170,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,212,170,0.45); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-weight: 500; font-size: 14px;
+    padding: 12px 24px; border-radius: 100px; cursor: pointer;
+    transition: all .2s; font-family: var(--font-body);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: #fff; font-weight: 700; font-size: 15px;
+    padding: 16px 32px; border-radius: 100px; border: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 30px rgba(37,211,102,0.3); font-family: var(--font-body);
+  }
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(37,211,102,0.45); }
+
+  /* ═══════════════ WIZARD ═══════════════ */
+  .wizard-header {
+    padding: 32px 0 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+
+  .progress-track {
+    width: 100%; height: 4px;
+    background: var(--surface2); border-radius: 100px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .5s cubic-bezier(.16,1,.3,1);
+  }
+
+  .step-label {
+    font-size: 12px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .step-label span { color: var(--accent); font-weight: 600; }
+
+  .step-dots {
+    display: flex; gap: 8px;
+  }
+  .step-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--surface2); transition: all .3s;
+  }
+  .step-dot.active { background: var(--accent); transform: scale(1.4); }
+  .step-dot.done { background: var(--accent2); }
+
+  /* ═══════════════ CARDS ═══════════════ */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 32px; letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .card-title .accent { color: var(--accent); }
+
+  .card-desc {
+    font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;
+  }
+
+  /* ═══════════════ INPUTS ═══════════════ */
+  .field { margin-bottom: 20px; }
+
+  .field label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.1);
+  }
+  .field input::placeholder { color: var(--muted); }
+  .field select option { background: var(--surface2); }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ═══════════════ OPCIONES VISUALES ═══════════════ */
+  .option-grid {
+    display: grid; gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .option-card {
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    border-radius: 14px; padding: 16px 12px;
+    text-align: center; cursor: pointer;
+    transition: all .2s; user-select: none;
+  }
+  .option-card:hover { border-color: rgba(0,212,170,0.4); }
+  .option-card.selected {
+    border-color: var(--accent);
+    background: rgba(0,212,170,0.08);
+    box-shadow: 0 0 20px rgba(0,212,170,0.15);
+  }
+  .option-card .opt-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+  .option-card .opt-label { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .option-card.selected .opt-label { color: var(--accent); }
+
+  /* slider */
+  .range-wrapper { position: relative; }
+  .range-track { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 100px; background: var(--surface2); outline: none; }
+  .range-track::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); cursor: pointer;
+    box-shadow: 0 0 12px rgba(0,212,170,0.5);
+  }
+  .range-value {
+    text-align: center; font-family: var(--font-display); font-size: 40px;
+    color: var(--accent); margin-top: 8px;
+  }
+
+  /* ═══════════════ NAVIGATION ═══════════════ */
+  .nav-btns {
+    display: flex; gap: 12px; justify-content: flex-end;
+    padding: 8px 0 40px;
+  }
+
+  .error-msg {
+    color: var(--danger); font-size: 13px; margin-top: 6px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  /* ═══════════════ RESULTADO ═══════════════ */
+  .result-header {
+    text-align: center; padding: 48px 16px 32px;
+  }
+
+  .result-greeting {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 8vw, 64px);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .result-tagline {
+    font-size: 15px; color: var(--muted); max-width: 440px; margin: 0 auto; line-height: 1.7;
+  }
+
+  /* IMC GAUGE */
+  .gauge-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px; margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .gauge-wrap {
+    position: relative; width: 220px; height: 120px; margin: 0 auto 24px;
+  }
+
+  .gauge-svg { width: 100%; }
+
+  .gauge-value-box {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    text-align: center;
+  }
+  .gauge-number {
+    font-family: var(--font-display);
+    font-size: 48px; line-height: 1;
+    color: var(--text);
+  }
+  .gauge-unit { font-size: 12px; color: var(--muted); }
+
+  .imc-category {
+    display: inline-block;
+    font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 20px; border-radius: 100px; margin-bottom: 12px;
+  }
+
+  .imc-desc { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 380px; margin: 0 auto; }
+
+  /* SEMÁFORO HÁBITOS */
+  .semaforo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px; margin-bottom: 16px;
+  }
+
+  .semaforo-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+  }
+  .semaforo-title { font-family: var(--font-display); font-size: 24px; }
+  .semaforo-badge {
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    padding: 5px 14px; border-radius: 100px;
+  }
+
+  .habit-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .habit-row:last-child { border-bottom: none; }
+  .habit-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+  .habit-info { flex: 1; }
+  .habit-label { font-size: 13px; font-weight: 600; }
+  .habit-detail { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .habit-dot {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* INSIGHT CARD */
+  .insight-card {
+    background: linear-gradient(135deg, rgba(0,212,170,0.06), rgba(59,130,246,0.06));
+    border: 1px solid rgba(0,212,170,0.2);
+    border-radius: var(--radius);
+    padding: 28px; margin-bottom: 16px;
+  }
+
+  .insight-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+  }
+
+  .insight-text {
+    font-size: 16px; line-height: 1.7; color: var(--text); font-weight: 300;
+  }
+
+  /* RECOMENDACIONES */
+  .reco-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
+  }
+
+  .reco-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px 16px;
+  }
+
+  .reco-icon { font-size: 24px; margin-bottom: 8px; }
+  .reco-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .reco-val { font-size: 18px; font-weight: 600; color: var(--text); }
+
+  /* CIERRE */
+  .cierre-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px; margin-bottom: 16px; text-align: center;
+  }
+
+  .cierre-vs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0;
+  }
+
+  .path-card {
+    border-radius: 14px; padding: 20px 16px;
+  }
+  .path-no {
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.15);
+  }
+  .path-yes {
+    background: rgba(0,212,170,0.06);
+    border: 1px solid rgba(0,212,170,0.2);
+  }
+  .path-icon { font-size: 28px; margin-bottom: 10px; }
+  .path-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .path-items { font-size: 12px; color: var(--muted); line-height: 1.8; }
+
+  .cierre-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--accent), #00b894);
+    color: #0a0d14; font-weight: 800; font-size: 16px;
+    padding: 18px 36px; border-radius: 100px; border: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 40px rgba(0,212,170,0.35);
+    margin-bottom: 16px; font-family: var(--font-body);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(0,212,170,0.35); }
+    50% { box-shadow: 0 0 70px rgba(0,212,170,0.6); }
+  }
+
+  .cierre-cta:hover { transform: translateY(-3px); }
+
+  .action-row {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    text-align: center; padding: 16px;
+    font-size: 11px; color: var(--muted); line-height: 1.6;
+    border-top: 1px solid var(--border); margin-top: 8px;
+  }
+
+  /* ═══════════════ RESPONSIVE ═══════════════ */
+  @media (max-width: 480px) {
+    .field-row { grid-template-columns: 1fr; }
+    .option-grid { grid-template-columns: repeat(2, 1fr); }
+    .reco-grid { grid-template-columns: 1fr 1fr; }
+    .cierre-vs { grid-template-columns: 1fr; }
+    .card { padding: 24px 18px; }
+  }
+
+  /* ═══════════════ TOAST ═══════════════ */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--surface); border: 1px solid var(--accent);
+    border-radius: 100px; padding: 12px 24px;
+    font-size: 14px; color: var(--accent);
+    transition: transform .4s cubic-bezier(.16,1,.3,1); z-index: 999;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* PRINT HIDE */
+  @media print {
+    .bg-orbs, .nav-btns, .action-row, .cierre-cta, .btn-whatsapp { display: none !important; }
+    body { background: #fff; color: #000; }
+    .card, .gauge-card, .semaforo-card, .insight-card, .reco-item, .cierre-card { border: 1px solid #ddd; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="app">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <div class="screen active" id="screen-hero">
+    <div class="hero">
+      <div class="logo-badge">⚡ ONE MORE · BIENESTAR</div>
+      <h1 class="hero-title">
+        <div class="line1">DESCUBRE CÓMO</div>
+        <div class="line2">ESTÁ TU CUERPO</div>
+      </h1>
+      <p class="hero-sub">Evaluación inteligente de tu composición corporal y hábitos de vida. Resultados personalizados en menos de 2 minutos.</p>
+      <div class="hero-stats">
+        <div class="stat-pill"><strong>IMC</strong> personalizado</div>
+        <div class="stat-pill"><strong>Hábitos</strong> evaluados</div>
+        <div class="stat-pill"><strong>100%</strong> gratuito</div>
+      </div>
+      <button class="btn-primary" onclick="goTo('screen-wizard')">
+        Comenzar evaluación &nbsp;→
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════ WIZARD ═══════════ -->
+  <div class="screen" id="screen-wizard">
+    <div class="wizard-header">
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:20%"></div>
+      </div>
+      <div class="step-dots" id="step-dots"></div>
+      <div class="step-label">Paso <span id="step-current">1</span> de 5</div>
+    </div>
+
+    <!-- PASO 1 -->
+    <div id="step-1">
+      <div class="card">
+        <div class="card-title">Datos <span class="accent">básicos</span></div>
+        <div class="card-desc">Empecemos por conocerte. Esta info es solo para personalizar tu resultado.</div>
+        <div class="field">
+          <label>Tu nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ej: María García" autocomplete="off">
+          <div class="error-msg" id="err-nombre">Por favor ingresa tu nombre.</div>
+        </div>
+        <div class="field">
+          <label>Edad (años)</label>
+          <input type="number" id="edad" placeholder="25" min="10" max="100">
+          <div class="error-msg" id="err-edad">Ingresa una edad válida (10–100).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div id="step-2" style="display:none">
+      <div class="card">
+        <div class="card-title">Medidas <span class="accent">corporales</span></div>
+        <div class="card-desc">Con estos datos calculamos tu IMC de forma precisa.</div>
+        <div class="field-row">
+          <div class="field">
+            <label>Peso (kg)</label>
+            <input type="number" id="peso" placeholder="70" min="20" max="300" step="0.1">
+            <div class="error-msg" id="err-peso">Peso inválido (20–300 kg).</div>
+          </div>
+          <div class="field">
+            <label>Estatura (cm)</label>
+            <input type="number" id="estatura" placeholder="170" min="100" max="250">
+            <div class="error-msg" id="err-estatura">Estatura inválida (100–250 cm).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div id="step-3" style="display:none">
+      <div class="card">
+        <div class="card-title">Estilo de <span class="accent">vida</span></div>
+        <div class="card-desc">¿Cómo es tu actividad diaria?</div>
+        <div class="field">
+          <label>Actividad laboral principal</label>
+          <div class="option-grid" id="opt-trabajo">
+            <div class="option-card" data-val="sedentario" onclick="selectOpt('opt-trabajo', this)">
+              <span class="opt-icon">💻</span><span class="opt-label">Oficina / escritorio</span>
+            </div>
+            <div class="option-card" data-val="semisedentario" onclick="selectOpt('opt-trabajo', this)">
+              <span class="opt-icon">🚶</span><span class="opt-label">Camino bastante</span>
+            </div>
+            <div class="option-card" data-val="activo" onclick="selectOpt('opt-trabajo', this)">
+              <span class="opt-icon">🏗️</span><span class="opt-label">Trabajo físico</span>
+            </div>
+            <div class="option-card" data-val="muy_activo" onclick="selectOpt('opt-trabajo', this)">
+              <span class="opt-icon">💪</span><span class="opt-label">Muy activo</span>
+            </div>
+          </div>
+          <div class="error-msg" id="err-trabajo">Selecciona una opción.</div>
+        </div>
+        <div class="field" style="margin-top:24px">
+          <label>¿Realizas ejercicio o deporte?</label>
+          <div class="option-grid" id="opt-ejercicio" style="grid-template-columns:1fr 1fr">
+            <div class="option-card" data-val="no" onclick="selectOpt('opt-ejercicio', this); toggleEjercicio(false)">
+              <span class="opt-icon">😴</span><span class="opt-label">No, aún no</span>
+            </div>
+            <div class="option-card" data-val="si" onclick="selectOpt('opt-ejercicio', this); toggleEjercicio(true)">
+              <span class="opt-icon">🏃</span><span class="opt-label">Sí, me ejercito</span>
+            </div>
+          </div>
+          <div class="error-msg" id="err-ejercicio">Selecciona una opción.</div>
+        </div>
+        <div class="field" id="frecuencia-wrap" style="display:none; margin-top:16px">
+          <label>Frecuencia de ejercicio (días por semana)</label>
+          <div class="range-wrapper">
+            <input type="range" class="range-track" id="frecuencia" min="1" max="7" value="3" oninput="updateRange('freq-val', this.value, 'días/semana')">
+          </div>
+          <div class="range-value" id="freq-val">3 días/semana</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 4 -->
+    <div id="step-4" style="display:none">
+      <div class="card">
+        <div class="card-title">Tus <span class="accent">hábitos</span></div>
+        <div class="card-desc">Los hábitos diarios definen tu bienestar real.</div>
+
+        <div class="field">
+          <label>Agua que consumes al día (litros)</label>
+          <div class="range-wrapper">
+            <input type="range" class="range-track" id="agua" min="0" max="4" value="1.5" step="0.5" oninput="updateRange('agua-val', this.value, 'L/día')">
+          </div>
+          <div class="range-value" id="agua-val">1.5 L/día</div>
+        </div>
+
+        <div class="field" style="margin-top:24px">
+          <label>Horas de sueño por noche</label>
+          <div class="range-wrapper">
+            <input type="range" class="range-track" id="sueno" min="3" max="12" value="7" oninput="updateRange('sueno-val', this.value, 'horas')">
+          </div>
+          <div class="range-value" id="sueno-val">7 horas</div>
+        </div>
+
+        <div class="field" style="margin-top:24px">
+          <label>Nivel de sedentarismo</label>
+          <div class="option-grid" id="opt-sedentarismo">
+            <div class="option-card" data-val="bajo" onclick="selectOpt('opt-sedentarismo', this)">
+              <span class="opt-icon">🚴</span><span class="opt-label">Muy activo/a</span>
+            </div>
+            <div class="option-card" data-val="medio" onclick="selectOpt('opt-sedentarismo', this)">
+              <span class="opt-icon">🪑</span><span class="opt-label">Moderado</span>
+            </div>
+            <div class="option-card" data-val="alto" onclick="selectOpt('opt-sedentarismo', this)">
+              <span class="opt-icon">📺</span><span class="opt-label">Bastante quieto/a</span>
+            </div>
+          </div>
+          <div class="error-msg" id="err-sedentarismo">Selecciona una opción.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 5 -->
+    <div id="step-5" style="display:none">
+      <div class="card">
+        <div class="card-title">Tu <span class="accent">salud</span></div>
+        <div class="card-desc">Esta información es completamente opcional y nos ayuda a personalizar aún más tus recomendaciones.</div>
+        <div class="field">
+          <label>¿Sufres de alguna enfermedad? (opcional)</label>
+          <textarea id="enfermedades" placeholder="Ej: diabetes tipo 2, hipertensión... o deja vacío si no aplica"></textarea>
+        </div>
+        <div class="field">
+          <label>¿Tomas algún medicamento o tratamiento? (opcional)</label>
+          <textarea id="tratamientos" placeholder="Ej: metformina, suplementos... o deja vacío si no aplica"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTONES NAV -->
+    <div class="nav-btns">
+      <button class="btn-secondary" id="btn-back" onclick="prevStep()" style="display:none">← Atrás</button>
+      <button class="btn-primary" id="btn-next" onclick="nextStep()">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ RESULTADO ═══════════ -->
+  <div class="screen" id="screen-result">
+    <div class="result-header">
+      <div class="logo-badge">📊 TU EVALUACIÓN</div>
+      <div class="result-greeting" id="result-greeting">Hola, <span style="color:var(--accent)" id="r-nombre"></span></div>
+      <p class="result-tagline" id="r-tagline"></p>
+    </div>
+
+    <!-- IMC -->
+    <div class="gauge-card">
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 220 120" id="gauge-svg">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#ef4444"/>
+              <stop offset="35%" style="stop-color:#f59e0b"/>
+              <stop offset="65%" style="stop-color:#00d4aa"/>
+              <stop offset="100%" style="stop-color:#3b82f6"/>
+            </linearGradient>
+          </defs>
+          <!-- track -->
+          <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="14" stroke-linecap="round"/>
+          <!-- fill -->
+          <path id="gauge-arc" d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283" style="transition: stroke-dashoffset 1.2s cubic-bezier(.16,1,.3,1)"/>
+          <!-- needle -->
+          <line id="gauge-needle" x1="110" y1="110" x2="110" y2="35" stroke="white" stroke-width="2.5" stroke-linecap="round" style="transform-origin: 110px 110px; transition: transform 1.2s cubic-bezier(.16,1,.3,1)"/>
+          <circle cx="110" cy="110" r="5" fill="white"/>
+        </svg>
+        <div class="gauge-value-box">
+          <div class="gauge-number" id="r-imc">--</div>
+          <div class="gauge-unit">IMC</div>
+        </div>
+      </div>
+      <div class="imc-category" id="r-cat-badge"></div>
+      <div class="imc-desc" id="r-cat-desc"></div>
+    </div>
+
+    <!-- HÁBITOS -->
+    <div class="semaforo-card">
+      <div class="semaforo-header">
+        <div class="semaforo-title">Tus Hábitos</div>
+        <div class="semaforo-badge" id="r-habit-badge"></div>
+      </div>
+      <div id="r-habits-list"></div>
+    </div>
+
+    <!-- INSIGHT -->
+    <div class="insight-card">
+      <div class="insight-label">✦ Tu diagnóstico personalizado</div>
+      <div class="insight-text" id="r-insight"></div>
+    </div>
+
+    <!-- RECOMENDACIONES -->
+    <div class="reco-grid" id="r-recos"></div>
+
+    <!-- CIERRE -->
+    <div class="cierre-card">
+      <div class="logo-badge">🎯 TU DECISIÓN</div>
+      <h2 style="font-family:var(--font-display); font-size:36px; margin:16px 0 8px">Tienes 2 caminos</h2>
+      <p style="font-size:14px; color:var(--muted)">Solo tú decides cuál tomar a partir de hoy.</p>
+
+      <div class="cierre-vs">
+        <div class="path-card path-no">
+          <div class="path-icon">😔</div>
+          <div class="path-title" style="color:var(--danger)">Seguir igual</div>
+          <div class="path-items">Sin cambios reales<br>Sin guía clara<br>Mismos resultados<br>Frustración continua</div>
+        </div>
+        <div class="path-card path-yes">
+          <div class="path-icon">🚀</div>
+          <div class="path-title" style="color:var(--accent)">Acompañamiento guiado</div>
+          <div class="path-items">Plan personalizado<br>Resultados medibles<br>Apoyo constante<br>Transformación real</div>
+        </div>
+      </div>
+
+      <button class="cierre-cta" onclick="openWhatsApp()">
+        👉 WhatsApp Colombia (+57)
+      </button>
+      <br><br>
+      <button class="btn-whatsapp" onclick="window.open('https://wa.me/584220247885','_blank')">
+        👉 WhatsApp Venezuela (+58)
+      </button>
+      <br>
+      <p style="font-size:12px; color:var(--muted)">Sin compromisos. Primera consulta gratuita.</p>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="action-row">
+      <button class="btn-secondary" onclick="window.print()">🖨️ Imprimir / PDF</button>
+      <button class="btn-whatsapp" onclick="shareWhatsApp()">📤 Compartir</button>
+      <button class="btn-secondary" onclick="resetApp()">🔄 Nueva evaluación</button>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ Esta evaluación es orientativa y <strong>no sustituye asesoría médica profesional</strong>.<br>
+      Consulta siempre con un profesional de la salud ante cualquier condición médica.
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+// ═══════════════════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════════════════
+let currentStep = 1;
+const totalSteps = 5;
+const data = {};
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+function initDots() {
+  const wrap = document.getElementById('step-dots');
+  wrap.innerHTML = '';
+  for(let i=1; i<=totalSteps; i++) {
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i===1?' active':'');
+    d.id = 'dot-'+i;
+    wrap.appendChild(d);
+  }
+}
+
+function updateProgress() {
+  const pct = (currentStep/totalSteps)*100;
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('step-current').textContent = currentStep;
+  for(let i=1; i<=totalSteps; i++) {
+    const d = document.getElementById('dot-'+i);
+    if(i < currentStep) { d.className='step-dot done'; }
+    else if(i===currentStep) { d.className='step-dot active'; }
+    else { d.className='step-dot'; }
+  }
+  document.getElementById('btn-back').style.display = currentStep>1?'inline-flex':'none';
+  document.getElementById('btn-next').textContent = currentStep===totalSteps ? 'Ver mi resultado →' : 'Siguiente →';
+}
+
+// ═══════════════════════════════════════════════════
+// NAVEGACIÓN
+// ═══════════════════════════════════════════════════
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(id==='screen-wizard') { initDots(); updateProgress(); }
+}
+
+function nextStep() {
+  if(!validateStep(currentStep)) return;
+  collectStep(currentStep);
+  if(currentStep===totalSteps) {
+    buildResult();
+    goTo('screen-result');
+    return;
+  }
+  document.getElementById('step-'+currentStep).style.display='none';
+  currentStep++;
+  document.getElementById('step-'+currentStep).style.display='block';
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function prevStep() {
+  document.getElementById('step-'+currentStep).style.display='none';
+  currentStep--;
+  document.getElementById('step-'+currentStep).style.display='block';
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════════
+// VALIDACIÓN
+// ═══════════════════════════════════════════════════
+function validateStep(step) {
+  let ok = true;
+  if(step===1) {
+    const n = document.getElementById('nombre').value.trim();
+    const e = parseInt(document.getElementById('edad').value);
+    showErr('err-nombre', !n);
+    showErr('err-edad', isNaN(e)||e<10||e>100);
+    ok = n && !isNaN(e) && e>=10 && e<=100;
+  }
+  if(step===2) {
+    const p = parseFloat(document.getElementById('peso').value);
+    const h = parseFloat(document.getElementById('estatura').value);
+    showErr('err-peso', isNaN(p)||p<20||p>300);
+    showErr('err-estatura', isNaN(h)||h<100||h>250);
+    ok = !isNaN(p)&&p>=20&&p<=300 && !isNaN(h)&&h>=100&&h<=250;
+  }
+  if(step===3) {
+    const t = getSelected('opt-trabajo');
+    const ej = getSelected('opt-ejercicio');
+    showErr('err-trabajo', !t);
+    showErr('err-ejercicio', !ej);
+    ok = t && ej;
+  }
+  if(step===4) {
+    const sed = getSelected('opt-sedentarismo');
+    showErr('err-sedentarismo', !sed);
+    ok = !!sed;
+  }
+  return ok;
+}
+
+function showErr(id, show) {
+  const el = document.getElementById(id);
+  if(el) el.classList.toggle('show', show);
+}
+
+// ═══════════════════════════════════════════════════
+// RECOLECCIÓN
+// ═══════════════════════════════════════════════════
+function collectStep(step) {
+  if(step===1) {
+    data.nombre = document.getElementById('nombre').value.trim();
+    data.edad = parseInt(document.getElementById('edad').value);
+  }
+  if(step===2) {
+    data.peso = parseFloat(document.getElementById('peso').value);
+    data.estatura = parseFloat(document.getElementById('estatura').value)/100;
+  }
+  if(step===3) {
+    data.trabajo = getSelected('opt-trabajo');
+    data.ejercicio = getSelected('opt-ejercicio');
+    data.frecuencia = parseInt(document.getElementById('frecuencia').value);
+  }
+  if(step===4) {
+    data.agua = parseFloat(document.getElementById('agua').value);
+    data.sueno = parseInt(document.getElementById('sueno').value);
+    data.sedentarismo = getSelected('opt-sedentarismo');
+  }
+  if(step===5) {
+    data.enfermedades = document.getElementById('enfermedades').value.trim();
+    data.tratamientos = document.getElementById('tratamientos').value.trim();
+  }
+}
+
+function getSelected(gridId) {
+  const sel = document.querySelector('#'+gridId+' .option-card.selected');
+  return sel ? sel.dataset.val : null;
+}
+
+// ═══════════════════════════════════════════════════
+// UI HELPERS
+// ═══════════════════════════════════════════════════
+function selectOpt(gridId, el) {
+  document.querySelectorAll('#'+gridId+' .option-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function toggleEjercicio(show) {
+  document.getElementById('frecuencia-wrap').style.display = show ? 'block' : 'none';
+}
+
+function updateRange(id, val, unit) {
+  document.getElementById(id).textContent = val+' '+unit;
+}
+
+// ═══════════════════════════════════════════════════
+// CÁLCULO IMC
+// ═══════════════════════════════════════════════════
+function calcIMC() {
+  return data.peso / (data.estatura * data.estatura);
+}
+
+function classifyIMC(imc) {
+  if(imc < 18.5) return { label:'Bajo peso', color:'#3b82f6', bg:'rgba(59,130,246,0.15)', desc:'Tu cuerpo está por debajo del rango saludable. Aumentar masa muscular y mejorar la nutrición son prioridades clave.' };
+  if(imc < 25)   return { label:'Peso normal', color:'#00d4aa', bg:'rgba(0,212,170,0.15)', desc:'Estás en el rango saludable. Tu enfoque puede ser optimizar rendimiento, energía y hábitos sostenibles.' };
+  if(imc < 30)   return { label:'Sobrepeso', color:'#f59e0b', bg:'rgba(245,158,11,0.15)', desc:'Estás por encima del rango ideal. Pequeños cambios consistentes pueden transformar tu composición corporal.' };
+  if(imc < 35)   return { label:'Obesidad I', color:'#ef4444', bg:'rgba(239,68,68,0.15)', desc:'Es momento de actuar. Con el enfoque correcto, cambios reales son completamente alcanzables.' };
+  if(imc < 40)   return { label:'Obesidad II', color:'#dc2626', bg:'rgba(220,38,38,0.15)', desc:'Esta etapa requiere atención prioritaria. El acompañamiento personalizado marca toda la diferencia.' };
+  return { label:'Obesidad III', color:'#b91c1c', bg:'rgba(185,28,28,0.15)', desc:'Es fundamental actuar hoy. Con guía profesional, cada paso cuenta y los resultados llegan.' };
+}
+
+// ═══════════════════════════════════════════════════
+// SCORING HÁBITOS
+// ═══════════════════════════════════════════════════
+function calcHabits() {
+  let score = 0;
+  const items = [];
+
+  // Ejercicio (0–8 pts)
+  if(data.ejercicio==='si') {
+    const freq = data.frecuencia||0;
+    const pts = freq>=5?8:freq>=3?5:2;
+    score+=pts;
+    items.push({ icon:'🏃', label:'Ejercicio', detail: freq+' días/semana', pts, max:8 });
+  } else {
+    items.push({ icon:'🏃', label:'Ejercicio', detail:'No realiza ejercicio', pts:0, max:8 });
+  }
+
+  // Trabajo (0–5 pts)
+  const tPts = {sedentario:0, semisedentario:2, activo:4, muy_activo:5}[data.trabajo]||0;
+  score+=tPts;
+  const tLabel = {sedentario:'Trabajo sedentario', semisedentario:'Actividad moderada', activo:'Trabajo activo', muy_activo:'Muy activo en el trabajo'}[data.trabajo]||'';
+  items.push({ icon:'💼', label:'Actividad laboral', detail:tLabel, pts:tPts, max:5 });
+
+  // Agua (0–6 pts)
+  const wPts = data.agua>=2.5?6:data.agua>=2?4:data.agua>=1.5?2:0;
+  score+=wPts;
+  items.push({ icon:'💧', label:'Hidratación', detail:data.agua+'L por día', pts:wPts, max:6 });
+
+  // Sueño (0–6 pts)
+  const sPts = (data.sueno>=7&&data.sueno<=9)?6:(data.sueno>=6||data.sueno===10)?3:0;
+  score+=sPts;
+  items.push({ icon:'😴', label:'Sueño', detail:data.sueno+' horas por noche', pts:sPts, max:6 });
+
+  // Sedentarismo inverso (0–5 pts via trabajo+ejercicio ya sumado, penalizar si alto)
+  const sedPen = {bajo:0, medio:-2, alto:-4}[data.sedentarismo]||0;
+  score+=sedPen;
+  const sedLabel = {bajo:'Nivel bajo de sedentarismo', medio:'Sedentarismo moderado', alto:'Alto sedentarismo'}[data.sedentarismo]||'';
+  items.push({ icon:'🪑', label:'Sedentarismo', detail:sedLabel, pts:sedPen, max:0 });
+
+  score = Math.max(0, score);
+  let level, color, bg;
+  if(score<=10)     { level='🔴 Hábitos críticos'; color='#ef4444'; bg='rgba(239,68,68,0.15)'; }
+  else if(score<=18){ level='🟡 En proceso'; color='#f59e0b'; bg='rgba(245,158,11,0.15)'; }
+  else              { level='🟢 Buen nivel'; color='#00d4aa'; bg='rgba(0,212,170,0.15)'; }
+
+  return { score, level, color, bg, items };
+}
+
+// ═══════════════════════════════════════════════════
+// CONSTRUIR RESULTADO
+// ═══════════════════════════════════════════════════
+function buildResult() {
+  collectStep(5);
+
+  const imc = calcIMC();
+  const imcRound = Math.round(imc*10)/10;
+  const catIMC = classifyIMC(imc);
+  const habits = calcHabits();
+  const nombre = data.nombre.split(' ')[0];
+
+  // Header
+  document.getElementById('r-nombre').textContent = nombre;
+  document.getElementById('r-tagline').textContent = 'Aquí está tu evaluación completa basada en tus datos y hábitos de vida.';
+
+  // GAUGE
+  document.getElementById('r-imc').textContent = imcRound;
+  animateGauge(imc);
+
+  // IMC badge
+  const badge = document.getElementById('r-cat-badge');
+  badge.textContent = catIMC.label;
+  badge.style.background = catIMC.bg;
+  badge.style.color = catIMC.color;
+  document.getElementById('r-cat-desc').textContent = catIMC.desc;
+
+  // HÁBITOS
+  const hBadge = document.getElementById('r-habit-badge');
+  hBadge.textContent = habits.level;
+  hBadge.style.background = habits.bg;
+  hBadge.style.color = habits.color;
+
+  const hList = document.getElementById('r-habits-list');
+  hList.innerHTML = habits.items.map(item => {
+    let dotColor = '#6b7a99';
+    if(item.pts > 0) dotColor = '#00d4aa';
+    if(item.pts < 0) dotColor = '#ef4444';
+    if(item.pts === 0 && item.max > 0) dotColor = '#ef4444';
+    return `<div class="habit-row">
+      <div class="habit-icon">${item.icon}</div>
+      <div class="habit-info">
+        <div class="habit-label">${item.label}</div>
+        <div class="habit-detail">${item.detail}</div>
+      </div>
+      <div class="habit-dot" style="background:${dotColor}"></div>
+    </div>`;
+  }).join('');
+
+  // INSIGHT
+  const insight = generateInsight(imc, habits.score, nombre, catIMC.label);
+  document.getElementById('r-insight').textContent = insight;
+
+  // RECOS
+  const recos = generateRecos(imc, habits);
+  document.getElementById('r-recos').innerHTML = recos.map(r=>
+    `<div class="reco-item">
+      <div class="reco-icon">${r.icon}</div>
+      <div class="reco-title">${r.title}</div>
+      <div class="reco-val">${r.val}</div>
+    </div>`
+  ).join('');
+}
+
+function animateGauge(imc) {
+  // IMC range: 14-40 → 0-100%
+  const pct = Math.min(100, Math.max(0, (imc-14)/26*100));
+  const arcLen = 283;
+  const offset = arcLen - (pct/100)*arcLen;
+  setTimeout(()=>{
+    document.getElementById('gauge-arc').style.strokeDashoffset = offset;
+    // needle: -90deg to +90deg
+    const angle = -90 + (pct/100)*180;
+    document.getElementById('gauge-needle').style.transform = `rotate(${angle}deg)`;
+  }, 300);
+}
+
+function generateInsight(imc, score, nombre, catLabel) {
+  if(imc<18.5 && score<=10) return `${nombre}, tu cuerpo y tus hábitos necesitan atención urgente. La buena noticia: desde este punto, cada pequeño cambio genera resultados rápidos y visibles.`;
+  if(imc<18.5) return `${nombre}, tu peso está por debajo del ideal, pero tus hábitos muestran potencial. Con ajustes nutricionales y seguimiento personalizado, puedes alcanzar una composición corporal óptima.`;
+  if(imc<25 && score>=19) return `${nombre}, tu perfil muestra una excelente base. Tienes hábitos saludables y un peso ideal. Con ajustes estratégicos puedes llevar tu bienestar al siguiente nivel.`;
+  if(imc<25) return `${nombre}, tu peso es saludable, pero tus hábitos tienen margen de mejora. Pequeños cambios sostenidos pueden transformar tu energía y calidad de vida.`;
+  if(imc<30 && score<=10) return `${nombre}, tu cuerpo está en una etapa donde pequeños cambios pueden generar grandes resultados. La combinación de hábitos y peso actual indica que es el momento perfecto para actuar.`;
+  if(imc<30) return `${nombre}, tu resultado muestra un sobrepeso moderado con hábitos en desarrollo. Con acompañamiento guiado, el proceso de transformación es completamente alcanzable y sostenible.`;
+  return `${nombre}, tu perfil indica una oportunidad de transformación real. Con el acompañamiento correcto, cada semana de trabajo consistente se traduce en resultados medibles y permanentes.`;
+}
+
+function generateRecos(imc, habits) {
+  const agua = data.peso < 60 ? '1.5 – 2 L' : data.peso < 80 ? '2 – 2.5 L' : '2.5 – 3 L';
+  const sueno = (data.edad < 25) ? '8 – 9 horas' : '7 – 8 horas';
+  const actividad = imc >= 30 ? 'Caminar 30 min/día' : imc >= 25 ? '3–4 días ejercicio' : '4–5 días activo';
+  const enfoque = imc < 18.5 ? 'Ganar masa muscular' : imc < 25 ? 'Optimizar rendimiento' : imc < 30 ? 'Pérdida progresiva' : 'Transformación integral';
+  return [
+    { icon:'💧', title:'Agua recomendada', val: agua },
+    { icon:'😴', title:'Sueño ideal', val: sueno },
+    { icon:'🏃', title:'Actividad sugerida', val: actividad },
+    { icon:'🎯', title:'Enfoque principal', val: enfoque },
+  ];
+}
+
+// ═══════════════════════════════════════════════════
+// WHATSAPP — MENSAJE COMPLETO
+// ═══════════════════════════════════════════════════
+
+// ⚙️ CONFIGURA TU NÚMERO AQUÍ (formato internacional, sin + ni espacios)
+const WA_PHONE = '573126387467';
+
+function buildFullWaPayload() {
+  const imc     = calcIMC();
+  const imcR    = Math.round(imc * 10) / 10;
+  const cat     = classifyIMC(imc);
+  const habits  = calcHabits();
+  const recos   = generateRecos(imc, habits);
+  const insight = generateInsight(imc, habits.score, data.nombre.split(' ')[0], cat.label);
+
+  const trabajoLabel = {
+    sedentario:    'Oficina / escritorio',
+    semisedentario:'Camino bastante',
+    activo:        'Trabajo físico',
+    muy_activo:    'Muy activo'
+  }[data.trabajo] || data.trabajo;
+
+  const sedLabel = {
+    bajo:  'Muy activo/a',
+    medio: 'Sedentarismo moderado',
+    alto:  'Alto sedentarismo'
+  }[data.sedentarismo] || data.sedentarismo;
+
+  const ejercicioStr = data.ejercicio === 'si'
+    ? `Sí — ${data.frecuencia} días/semana`
+    : 'No realiza ejercicio';
+
+  const recosStr = recos
+    .map(r => `  • ${r.title}: ${r.val}`)
+    .join('\n');
+
+  const mensaje = [
+    `*━━━ EVALUACIÓN ONE MORE ━━━*`,
+    ``,
+    `👤 *Datos personales*`,
+    `  • Nombre: ${data.nombre}`,
+    `  • Edad: ${data.edad} años`,
+    ``,
+    `📏 *Medidas corporales*`,
+    `  • Peso: ${data.peso} kg`,
+    `  • Estatura: ${Math.round(data.estatura * 100)} cm`,
+    `  • IMC: *${imcR}*`,
+    `  • Clasificación: *${cat.label}*`,
+    ``,
+    `🏃 *Estilo de vida*`,
+    `  • Actividad laboral: ${trabajoLabel}`,
+    `  • Ejercicio: ${ejercicioStr}`,
+    `  • Sedentarismo: ${sedLabel}`,
+    ``,
+    `💧 *Hábitos diarios*`,
+    `  • Agua: ${data.agua} L/día`,
+    `  • Sueño: ${data.sueno} horas/noche`,
+    ``,
+    `🏥 *Salud*`,
+    `  • Enfermedades: ${data.enfermedades || 'No reporta'}`,
+    `  • Tratamientos: ${data.tratamientos || 'No reporta'}`,
+    ``,
+    `📊 *Perfil de hábitos: ${habits.level}*`,
+    ``,
+    `✦ *Diagnóstico inicial*`,
+    `${insight}`,
+    ``,
+    `🎯 *Recomendaciones*`,
+    `${recosStr}`,
+    ``,
+    `━━━━━━━━━━━━━━━━━━━━━━`,
+    `Quiero recibir mi *asesoría personalizada* con Jose Lugo 💜`
+  ].join('\n');
+
+  return encodeURIComponent(mensaje);
+}
+
+function openWhatsApp() {
+  const text = buildFullWaPayload();
+  window.open(`https://wa.me/${WA_PHONE}?text=${text}`, '_blank');
+}
+
+function shareWhatsApp() {
+  const imc   = Math.round(calcIMC() * 10) / 10;
+  const cat   = classifyIMC(parseFloat(imc));
+  const h     = calcHabits();
+  const text  = encodeURIComponent(
+    `Acabo de evaluar mi bienestar con *One More* 🌟\n\n` +
+    `📊 IMC: ${imc} → ${cat.label}\n` +
+    `💚 Hábitos: ${h.level}\n\n` +
+    `¡Haz la tuya gratis! 👆`
+  );
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+// ═══════════════════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════════════════
+function resetApp() {
+  currentStep = 1;
+  document.querySelectorAll('.option-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('input[type=text], input[type=number], textarea').forEach(i=>i.value='');
+  document.getElementById('frecuencia-wrap').style.display='none';
+  document.getElementById('agua-val').textContent='1.5 L/día';
+  document.getElementById('sueno-val').textContent='7 horas';
+  document.getElementById('freq-val').textContent='3 días/semana';
+  document.getElementById('agua').value=1.5;
+  document.getElementById('sueno').value=7;
+  document.getElementById('frecuencia').value=3;
+  for(let i=1;i<=5;i++) document.getElementById('step-'+i).style.display = i===1?'block':'none';
+  goTo('screen-wizard');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
