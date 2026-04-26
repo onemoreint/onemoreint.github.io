@@ -900,13 +900,28 @@
     window.location.href = url;
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('leadForm');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        enviarLeadWhatsApp();
-      });
+  document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('leadForm');
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      enviarLeadWhatsApp();
+    });
+  }
+});
+    });
+  }
+
+  const boton = document.querySelector('.btn-form');
+
+  if (boton) {
+    boton.addEventListener('click', function(e) {
+      e.preventDefault();
+      enviarLeadWhatsApp();
+    });
+  }
+});
     }
   });
 </script>
