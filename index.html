@@ -787,7 +787,7 @@
             <textarea id="mensaje" placeholder="Cuéntanos tu situación..."></textarea>
           </div>
         </div>
-        <button type="button" class="btn-form" onclick="enviarLeadWhatsApp()">QUIERO UNIRME A ONE MORE →</button>
+        <button type="submit" class="btn-form">QUIERO UNIRME A ONE MORE →</button>
         <p class="privacy-note">🔒 Tus datos están seguros. No los compartimos con terceros.</p>
       </form>
       <div class="success-msg" id="successMsg">
@@ -893,35 +893,19 @@
       `Mensaje: ${lead.mensaje || 'No especificado'}`,
       '',
       'Estoy listo para recibir información y avanzar.'
-    ].join('
-');
+    ].join('\n');
 
     const url = `https://wa.me/573126387467?text=${encodeURIComponent(texto)}`;
     window.location.href = url;
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('leadForm');
-
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      enviarLeadWhatsApp();
-    });
-  }
-});
-    });
-  }
-
-  const boton = document.querySelector('.btn-form');
-
-  if (boton) {
-    boton.addEventListener('click', function(e) {
-      e.preventDefault();
-      enviarLeadWhatsApp();
-    });
-  }
-});
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('leadForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        enviarLeadWhatsApp();
+      });
     }
   });
 </script>
