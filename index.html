@@ -448,6 +448,38 @@
       .conversion-strip .btn-buy-max{width:100%;max-width:280px}
       .wa-float{bottom:7.2rem}
     }
+
+    /* ── ANIME.JS ENHANCED MOTION ── */
+    .anime-motion-ready .motion-card,
+    .anime-motion-ready .motion-stat,
+    .anime-motion-ready .motion-section,
+    .anime-motion-ready .motion-country {
+      will-change: transform, opacity;
+    }
+
+    .anime-glow {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .anime-glow::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle, rgba(232,201,122,0.18), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .anime-glow:hover::after {
+      opacity: 1;
+    }
+
+    .conversion-strip {
+      will-change: transform, opacity;
+    }
+
   </style>
 </head>
 <body>
@@ -886,6 +918,261 @@
   <span class="wa-label">ESCRÍBENOS</span>
   <span class="wa-pulse"></span>
 </a>
+
+
+<!-- ANIME.JS — MOTOR DE ANIMACIONES PREMIUM -->
+<!-- Integración recomendada para One More: mejora hero, tarjetas, métricas, CTA, ticker y WhatsApp flotante -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" referrerpolicy="no-referrer"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof anime === 'undefined') {
+      console.warn('Anime.js no cargó correctamente. La web seguirá funcionando sin animaciones avanzadas.');
+      return;
+    }
+
+    document.body.classList.add('anime-motion-ready');
+
+    const motionCards = document.querySelectorAll(
+      '.problem-card, .producto-card, .rango-card, .pack-diamond, .testi-card, .form-box'
+    );
+
+    const motionStats = document.querySelectorAll(
+      '.tech-stat, .tech-badge, .certif-badge, .pack-feat'
+    );
+
+    const motionCountries = document.querySelectorAll(
+      '.pais-card'
+    );
+
+    const motionSections = document.querySelectorAll(
+      '.section-label, .section-title, .section-sub'
+    );
+
+    motionCards.forEach(el => el.classList.add('motion-card', 'anime-glow'));
+    motionStats.forEach(el => el.classList.add('motion-stat'));
+    motionCountries.forEach(el => el.classList.add('motion-country'));
+    motionSections.forEach(el => el.classList.add('motion-section'));
+
+    /* HERO DE ALTO IMPACTO */
+    anime.set('.hero-badge, .hero h1, .hero-sub, .hero-btns, .hero-certifs', {
+      opacity: 0,
+      translateY: 28
+    });
+
+    const heroTimeline = anime.timeline({
+      easing: 'easeOutExpo',
+      duration: 850
+    });
+
+    heroTimeline
+      .add({
+        targets: '.hero-badge',
+        opacity: [0, 1],
+        translateY: [22, 0],
+        duration: 700
+      })
+      .add({
+        targets: '.hero h1',
+        opacity: [0, 1],
+        translateY: [36, 0],
+        duration: 900
+      }, '-=320')
+      .add({
+        targets: '.hero-sub',
+        opacity: [0, 1],
+        translateY: [26, 0],
+        duration: 750
+      }, '-=420')
+      .add({
+        targets: '.hero-btns',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 650
+      }, '-=350')
+      .add({
+        targets: '.hero-certifs',
+        opacity: [0, 1],
+        translateY: [18, 0],
+        duration: 650
+      }, '-=300');
+
+    /* ENTRADAS AL HACER SCROLL */
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+
+        anime({
+          targets: entry.target,
+          opacity: [0, 1],
+          translateY: [38, 0],
+          scale: [0.97, 1],
+          duration: 850,
+          easing: 'easeOutExpo'
+        });
+
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.motion-card, .motion-section, .motion-country').forEach(function(el) {
+      anime.set(el, { opacity: 0, translateY: 38, scale: 0.97 });
+      revealObserver.observe(el);
+    });
+
+    /* ESTADÍSTICAS Y CERTIFICACIONES CON ENTRADA ESCALONADA */
+    const statObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+
+        const parent = entry.target.parentElement;
+        const group = parent ? parent.querySelectorAll('.motion-stat') : [entry.target];
+
+        anime({
+          targets: group,
+          opacity: [0, 1],
+          translateY: [22, 0],
+          scale: [0.94, 1],
+          delay: anime.stagger(85),
+          duration: 700,
+          easing: 'easeOutBack'
+        });
+
+        group.forEach(item => statObserver.unobserve(item));
+      });
+    }, { threshold: 0.22 });
+
+    motionStats.forEach(function(el) {
+      anime.set(el, { opacity: 0, translateY: 22, scale: 0.94 });
+      statObserver.observe(el);
+    });
+
+    /* CONTADORES ANIMADOS: +90%, 24h, 10+, 100+ */
+    document.querySelectorAll('.tech-stat-num').forEach(function(el) {
+      const originalText = el.textContent.trim();
+      const match = originalText.match(/^(\+)?(\d+)(%|\+|h)?$/);
+
+      if (!match) return;
+
+      const prefix = match[1] || '';
+      const number = parseInt(match[2], 10);
+      const suffix = match[3] || '';
+      let animated = false;
+
+      const counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting || animated) return;
+          animated = true;
+
+          const data = { value: 0 };
+
+          anime({
+            targets: data,
+            value: number,
+            round: 1,
+            duration: 1300,
+            easing: 'easeOutExpo',
+            update: function() {
+              el.textContent = prefix + data.value + suffix;
+            },
+            complete: function() {
+              el.textContent = originalText;
+            }
+          });
+
+          counterObserver.unobserve(el);
+        });
+      }, { threshold: 0.7 });
+
+      counterObserver.observe(el);
+    });
+
+    /* CTA Y BOTONES CON MICROINTERACCIÓN */
+    document.querySelectorAll(
+      '.btn-primary, .btn-secondary, .btn-gold, .btn-buy-max, .btn-form, .nav-cta, .nav-register, .wa-float, .soporte-strip a'
+    ).forEach(function(btn) {
+      btn.addEventListener('mouseenter', function() {
+        anime.remove(btn);
+        anime({
+          targets: btn,
+          scale: 1.055,
+          translateY: -2,
+          duration: 220,
+          easing: 'easeOutQuad'
+        });
+      });
+
+      btn.addEventListener('mouseleave', function() {
+        anime.remove(btn);
+        anime({
+          targets: btn,
+          scale: 1,
+          translateY: 0,
+          duration: 240,
+          easing: 'easeOutQuad'
+        });
+      });
+    });
+
+    /* BARRA FIJA DE CONVERSIÓN */
+    anime.set('.conversion-strip', {
+      translateY: 80,
+      opacity: 0
+    });
+
+    anime({
+      targets: '.conversion-strip',
+      translateY: [80, 0],
+      opacity: [0, 1],
+      delay: 1300,
+      duration: 800,
+      easing: 'easeOutExpo'
+    });
+
+    /* WHATSAPP FLOTANTE CON PULSO SUAVE */
+    anime({
+      targets: '.wa-float',
+      scale: [1, 1.045, 1],
+      duration: 2400,
+      loop: true,
+      easing: 'easeInOutSine'
+    });
+
+    /* TICKER MÁS FLUIDO: deja CSS como respaldo y refuerza movimiento */
+    const ticker = document.querySelector('.ticker');
+    if (ticker) {
+      ticker.style.animation = 'none';
+      anime({
+        targets: ticker,
+        translateX: ['0%', '-50%'],
+        duration: 30000,
+        loop: true,
+        easing: 'linear'
+      });
+    }
+
+    /* FORMULARIO: EFECTO DE ENFOQUE PREMIUM */
+    document.querySelectorAll('.field input, .field select, .field textarea').forEach(function(field) {
+      field.addEventListener('focus', function() {
+        anime({
+          targets: field,
+          scale: 1.01,
+          duration: 180,
+          easing: 'easeOutQuad'
+        });
+      });
+
+      field.addEventListener('blur', function() {
+        anime({
+          targets: field,
+          scale: 1,
+          duration: 180,
+          easing: 'easeOutQuad'
+        });
+      });
+    });
+  });
+</script>
 
 <script>
   const WHATSAPP_NUMBER = '573126387467';
