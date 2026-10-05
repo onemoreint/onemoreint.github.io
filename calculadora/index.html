@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONE MORE · Calculadora Global</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' fill='%23C9A84C'%3E✦%3C/text%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       ONE MORE BRAND IDENTITY
+       ============================================================ */
+
+
+    :root {
+      --primary: #C9A84C;
+      --primary-dark: #A8892E;
+      --primary-light: #E8D5A3;
+      --accent: #2C3E50;
+      --bg: #0F0E12;
+      --bg-card: #1A1820;
+      --bg-elevated: #24212B;
+      --bg-hover: #2F2A38;
+      --text: #F5F0EB;
+      --text-secondary: #B8B0A8;
+      --text-muted: #6A6460;
+      --gold: #C9A84C;
+      --gold-light: #E8D5A3;
+      --gold-dim: rgba(201,168,76,0.12);
+      --green: #4CAF50;
+      --green-dim: rgba(76,175,80,0.12);
+      --red: #E57373;
+      --red-dim: rgba(229,115,115,0.12);
+      --shadow: 0 8px 32px rgba(0,0,0,0.5);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.6);
+      --radius-sm: 8px;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding: 24px;
+      position: relative;
+    }
+
+    /* Patrón de fondo sutil */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(201,168,76,0.04) 0%, transparent 60%),
+        radial-gradient(circle at 80% 50%, rgba(44,62,80,0.04) 0%, transparent 60%),
+        radial-gradient(circle at 50% 100%, rgba(201,168,76,0.02) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       BRAND HEADER
+       ============================================================ */
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0 24px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      font-size: 28px;
+      color: var(--primary);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 4px rgba(201,168,76,0.3)); }
+      50% { opacity: 0.7; filter: drop-shadow(0 0 12px rgba(201,168,76,0.6)); }
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .brand-name .gold {
+      color: var(--primary);
+    }
+
+    .brand-tagline {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(201,168,76,0.08);
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .brand-version {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       LAYOUT PRINCIPAL (igual que antes)
+       ============================================================ */
+
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================================
+       TARJETAS MEJORADAS
+       ============================================================ */
+
+    .card {
+      background: linear-gradient(180deg, var(--bg-card), var(--bg-elevated));
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+    .card:hover {
+      border-color: rgba(201,168,76,0.25);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--gold-dim), rgba(201,168,76,0.04));
+      border: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .card-title .accent {
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       BOTONES CON PERSONALIDAD
+       ============================================================ */
+
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      min-height: 50px;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.02em;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+      color: #0a0a0f;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+    }
+    .btn-gold:hover {
+      box-shadow: 0 6px 32px rgba(201,168,76,0.4);
+      filter: brightness(1.08);
+    }
+
+    .btn-dark {
+      background: var(--bg-elevated);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .btn-dark:hover {
+      background: var(--bg-hover);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .btn-red {
+      background: var(--red-dim);
+      color: var(--red);
+      border: 1px solid rgba(229,115,115,0.25);
+    }
+    .btn-red:hover {
+      background: rgba(229,115,115,0.2);
+    }
+
+    .btn-share {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.2);
+    }
+    .btn-share:hover {
+      box-shadow: 0 6px 32px rgba(37,211,102,0.3);
+      filter: brightness(1.05);
+    }
+
+    /* ============================================================
+       TASA
+       ============================================================ */
+
+    .rate-display {
+      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-hover));
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .rate-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--gold-light);
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ============================================================
+       CARRITO MEJORADO
+       ============================================================ */
+
+    .cart-price-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .cart-price-cell {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .cart-price-cell.distributor b { color: #6fa8dc; }
+    .cart-price-cell.client b { color: var(--gold-light); }
+    .cart-price-cell.profit b { color: var(--green); }
+
+    /* ============================================================
+       KPI ANIMADOS
+       ============================================================ */
+
+    @keyframes countUp {
+      from { opacity: 0.5; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .kpi strong {
+      animation: countUp 0.4s ease;
+      display: block;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .cart-price-table { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      body { padding: 12px; }
+      .brand-header { flex-direction: column; align-items: flex-start; }
+      .brand-name { font-size: 22px; }
+      .cart-price-table { grid-template-columns: 1fr 1fr; }
+      .ve-rate-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ============================================================
+       RESTO DE ESTILOS (mantener los existentes)
+       ============================================================ */
+
+
+    /* ===== Componentes completados ===== */
+    .form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+    label, .rate-label { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-secondary); }
+    select, input[type="text"], input[type="number"] {
+      width:100%; background:var(--bg); color:var(--text); border:1px solid rgba(201,168,76,0.18);
+      border-radius:var(--radius); padding:12px 14px; font:inherit; font-size:14px; min-height:46px; outline:none;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    select:focus, input:focus { border-color:var(--gold); box-shadow:0 0 0 3px var(--gold-dim); }
+    input[readonly] { color:var(--gold-light); font-weight:700; }
+    .btn-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:end; }
+    .btn-row .form-group { margin-bottom:0; }
+    .note { font-size:12px; color:var(--text-secondary); margin-top:10px; }
+    .footer { text-align:center; color:var(--text-muted); font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:24px 0 8px; }
+    .rate-value.loading { opacity:.5; animation:pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity:.25; } }
+    .rate-meta { font-size:12px; color:var(--text-secondary); margin-top:4px; }
+    .source-pill { display:inline-block; margin-top:10px; font-size:11px; font-weight:600; color:var(--gold-light); background:var(--gold-dim); border:1px solid rgba(201,168,76,0.2); padding:4px 12px; border-radius:999px; }
+    .error-msg { display:none; margin-top:10px; font-size:12px; color:var(--red); background:var(--red-dim); padding:8px 12px; border-radius:var(--radius-sm); }
+    .ve-rate-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px; }
+    .ve-rate-card { background:var(--bg-elevated); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius-sm); padding:10px 6px; font:inherit; font-size:11px; cursor:pointer; text-align:center; transition:all .2s; }
+    .ve-rate-card strong { display:block; color:var(--text); font-size:14px; }
+    .ve-rate-card.active, .ve-rate-card:hover { border-color:var(--gold); background:var(--gold-dim); }
+    .ve-rate-card.active strong { color:var(--gold-light); }
+    .search-box { margin-bottom:12px; }
+    .product-grid { display:grid; grid-template-columns:1fr; gap:0; }
+    .price-role-selector { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .price-role-btn { background:var(--bg); color:var(--text-secondary); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius); padding:12px; font:inherit; font-size:13px; font-weight:700; cursor:pointer; transition:all .2s; }
+    .price-role-btn.active { background:var(--gold-dim); border-color:var(--gold); color:var(--gold-light); }
+    .selected-price-box { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:8px; padding:12px 14px; background:rgba(0,0,0,0.25); border:1px solid rgba(201,168,76,0.12); border-radius:var(--radius); }
+    .selected-price-box span, .selected-price-box small { display:block; font-size:11px; color:var(--text-secondary); }
+    .selected-price-box strong { display:block; font-size:20px; color:var(--gold-light); }
+    .product-preview { display:grid; grid-template-columns:140px 1fr; gap:16px; margin-top:16px; padding:16px; background:rgba(0,0,0,0.2); border:1px solid rgba(201,168,76,0.1); border-radius:var(--radius-lg); }
+    .product-preview-media img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--radius); background:var(--bg-elevated); }
+    .product-preview-info h3 { font-family:'Playfair Display',serif; font-size:20px; color:var(--text); }
+    .product-preview-desc { font-size:13px; color:var(--text-secondary); margin:4px 0 8px; }
+    .product-tags, .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+    .product-tag, .chip { font-size:11px; padding:4px 10px; border-radius:999px; background:var(--gold-dim); color:var(--gold-light); border:1px solid rgba(201,168,76,0.18); }
+    .price-compare, .preview-local-prices { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:6px; }
+    .price-compare-card, .preview-local-prices > div { padding:8px; border-radius:var(--radius-sm); background:rgba(0,0,0,0.25); text-align:center; }
+    .price-compare-card span, .preview-local-prices span { display:block; font-size:10px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em; }
+    .price-compare-card strong, .preview-local-prices b { font-size:14px; }
+    .price-compare-card.distributor strong { color:#6fa8dc; }
+    .price-compare-card.client strong { color:var(--gold-light); }
+    .price-compare-card.profit strong, .local-profit b { color:var(--green); }
+    .preview-local-prices b { font-size:12px; }
+    .preview-source { font-size:11px; color:var(--text-muted); margin-top:8px; }
+    .cart { display:flex; flex-direction:column; gap:10px; }
+    .cart-item { padding:14px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius); }
+    .cart-item-header { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .cart-item-title { font-weight:700; }
+    .cart-item-badge { font-size:10px; padding:3px 8px; border-radius:999px; background:var(--gold-dim); color:var(--gold-light); white-space:nowrap; }
+    .cart-item-meta { font-size:12px; color:var(--text-secondary); margin-top:4px; }
+    .cart-price-cell .label, .cart-price-cell .local { display:block; font-size:10px; color:var(--text-secondary); }
+    .cart-price-cell.active { border-color:var(--gold); }
+    .cart-item-remove { text-align:right; margin-top:8px; }
+    .remove { background:none; border:1px solid rgba(229,115,115,0.3); color:var(--red); border-radius:var(--radius-sm); padding:6px 12px; font:inherit; font-size:12px; cursor:pointer; }
+    .comparison-summary { margin-top:12px; padding:14px; border-radius:var(--radius); background:var(--gold-dim); border:1px solid rgba(201,168,76,0.2); }
+    .comparison-total-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:8px; }
+    .comparison-total-grid > div { text-align:center; }
+    .comparison-total-grid small { display:block; font-size:10px; color:var(--text-secondary); }
+    .comparison-total-grid strong { display:block; font-size:15px; }
+    .comparison-total-grid .profit strong { color:var(--green); }
+    .treatment-card { padding:14px; background:rgba(0,0,0,0.2); border:1px solid rgba(201,168,76,0.12); border-radius:var(--radius); font-size:13px; }
+    .treatment-card .chips { margin-top:10px; margin-bottom:0; }
+    .kpi-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+    .kpi { padding:16px; border-radius:var(--radius-lg); background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.06); }
+    .kpi span { font-size:11px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.08em; }
+    .kpi strong { font-size:clamp(18px,2.6vw,26px); font-weight:800; word-break:break-word; }
+    .kpi.gold { border-color:rgba(201,168,76,0.3); background:var(--gold-dim); }
+    .kpi.gold strong { color:var(--gold-light); }
+    .summary-box { font-size:13px; line-height:1.8; color:var(--text-secondary); padding:14px; border-radius:var(--radius); background:rgba(0,0,0,0.2); }
+    .summary-box b { color:var(--text); }
+    .shipping-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .shipping-title { font-size:13px; font-weight:700; }
+    .shipping-progress { height:8px; border-radius:999px; background:rgba(255,255,255,0.06); overflow:hidden; margin-bottom:14px; }
+    .shipping-progress-bar { height:100%; background:linear-gradient(90deg,var(--primary-dark),var(--primary-light)); transition:width .4s ease; }
+    .shipping-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+    .ship-item { padding:10px; border-radius:var(--radius-sm); background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.06); font-size:11px; color:var(--text-secondary); text-align:center; }
+    .ship-item strong { display:block; font-size:16px; color:var(--text); }
+    .ship-item.free strong { color:var(--green); }
+    .ship-item.ship-active { border-color:var(--gold); background:var(--gold-dim); }
+    .ship-item.ship-active strong { color:var(--gold-light); }
+    .toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%,120px); display:flex; align-items:center; gap:10px; padding:12px 18px; background:var(--bg-elevated); border:1px solid var(--gold); border-radius:999px; box-shadow:var(--shadow-lg); z-index:100; transition:transform .35s cubic-bezier(0.34,1.56,0.64,1); font-size:13px; max-width:calc(100% - 32px); }
+    .toast.show { transform:translate(-50%,0); }
+    .toast-icon { width:22px; height:22px; border-radius:50%; background:var(--gold); color:#0a0a0f; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
+    @media (max-width: 640px) {
+      .product-preview { grid-template-columns:1fr; }
+      .product-preview-media img { max-height:220px; }
+      .shipping-grid { grid-template-columns:1fr 1fr; }
+      .btn-row { grid-template-columns:1fr; }
+      .kpi-grid { grid-template-columns:1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<main class="app">
+
+  <!-- ============================================================
+       BRAND HEADER (NUEVO)
+       ============================================================ -->
+
+  <header class="brand-header">
+    <div class="logo-container">
+      <span class="logo-icon">✦</span>
+      <span class="brand-name">ONE<span class="gold">MORE</span></span>
+      <span class="brand-version">v15 · Premium</span>
+    </div>
+    <div>
+      <span class="brand-tagline">Calculadora Global</span>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO (SIMPLIFICADO)
+       ============================================================ -->
+
+  <div style="margin-bottom: 24px;">
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);font-weight:900;color:var(--text);letter-spacing:-0.02em;">
+      Comparador <span style="color:var(--gold);">Distribuidor</span> vs <span style="color:var(--gold-light);">Cliente</span>
+    </h1>
+    <p style="color:var(--text-secondary);font-size:14px;max-width:600px;">
+      Selecciona productos y consulta al instante precios, diferencia y margen.
+    </p>
+  </div>
+
+  <!-- ============================================================
+       GRID PRINCIPAL (IGUAL QUE ANTES)
+       ============================================================ -->
+
+  <div class="main-grid">
+
+    <!-- COLUMNA IZQUIERDA: Configuración y Productos -->
+    <div class="left-col">
+
+      <!-- Configuración -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-icon">⚙️</div>
+          <div class="card-title">Configuración</div>
+        </div>
+
+        <div class="form-group">
+          <label>País / Moneda local</label>
+          <select id="country">
+            <option value="US">Estados Unidos · USD</option>
+            <option value="VE">Venezuela · VES</option>
+            <option value="MX">México · MXN</option>
+            <option value="CO" selected>Colombia · TRM · COP</option>
+            <option value="PE">Perú · PEN</option>
+            <option value="EC">Ecuador · USD</option>
+            <option value="DO">República Dominicana · DOP</option>
+            <option value="BR">Brasil · BRL</option>
+            <option value="TR">Turquía · TRY</option>
+            <option value="DE">Alemania · EUR</option>
+            <option value="FR">Francia · EUR</option>
+            <option value="IT">Italia · EUR</option>
+            <option value="GB">Inglaterra / Reino Unido · GBP</option>
+            <option value="ES">España · EUR</option>
+            <option value="PT">Portugal · EUR</option>
+            <option value="NL">Países Bajos · EUR</option>
+            <option value="BE">Bélgica · EUR</option>
+            <option value="DK">Dinamarca · DKK</option>
+            <option value="SE">Suecia · SEK</option>
+            <option value="BG">Bulgaria · BGN</option>
+            <option value="MK">Macedonia · MKD</option>
+            <option value="RO">Rumania · RON</option>
+            <option value="AZ">Azerbaiyán · AZN</option>
+            <option value="KZ">Kazajistán · KZT</option>
+            <option value="KG">Kirguistán · KGS</option>
+            <option value="TM">Turkmenistán · TMT</option>
+            <option value="UZ">Uzbekistán · UZS</option>
+            <option value="IN">India · INR</option>
+            <option value="ID">Indonesia · IDR</option>
+            <option value="PK">Pakistán · PKR</option>
+            <option value="MN">Mongolia · MNT</option>
+            <option value="BD">Bangladesh · BDT</option>
+            <option value="GE">Georgia · GEL</option>
+            <option value="JO">Jordania · JOD</option>
+            <option value="NG">Nigeria · NGN</option>
+            <option value="TN">Túnez · TND</option>
+            <option value="MA">Marruecos · MAD</option>
+            <option value="MT">Malta · EUR</option>
+            <option value="LV">Letonia · EUR</option>
+            <option value="SI">Eslovenia · EUR</option>
+            <option value="FI">Finlandia · EUR</option>
+            <option value="HR">Croacia · EUR</option>
+            <option value="PL">Polonia · EUR</option>
+            <option value="LU">Luxemburgo · EUR</option>
+            <option value="HU">Hungría · EUR</option>
+            <option value="EE">Estonia · EUR</option>
+            <option value="GR">Grecia · EUR</option>
+            <option value="SK">Eslovaquia · EUR</option>
+            <option value="CZ">Chequia · EUR</option>
+            <option value="AT">Austria · EUR</option>
+            <option value="LT">Lituania · EUR</option>
+            <option value="CY">Chipre · EUR</option>
+            <option value="IE">Irlanda · EUR</option>
+            <option value="NO">Noruega · EUR</option>
+          </select>
+        </div>
+
+        <!-- Tasas Venezuela -->
+        <div id="venezuelaRateBox" style="display:none">
+          <div class="form-group">
+            <label>Tipo de tasa Venezuela</label>
+            <select id="venezuelaRateType">
+              <option value="bcv" selected>BCV oficial (Bs. 791,32)</option>
+              <option value="binance">Binance P2P (Bs. 953,99)</option>
+              <option value="bybit">Bybit P2P (Bs. 953,50)</option>
+              <option value="promedio">Dólar Promedio (Bs. 899,60)</option>
+              <option value="paypal">Paypal (Bs. 878,00)</option>
+              <option value="zelle">Zelle (Bs. 932,00)</option>
+              <option value="usdt">USDT / mercado P2P (Ref.)</option>
+            </select>
+            <p class="note" style="margin-top:8px">Tasas de referencia del mercado venezolano actualizadas al 20/04/2026.</p>
+          </div>
+          <div class="ve-rate-grid" id="venezuelaRateCards">
+            <button type="button" class="ve-rate-card active" data-rate-type="bcv" onclick="selectVenezuelaRate('bcv', 791.32)">BCV<strong>791,32</strong></button>
+            <button type="button" class="ve-rate-card" data-rate-type="binance" onclick="selectVenezuelaRate('binance', 953.99)">Binance<strong>953,99</strong></button>
+            <button type="button" class="ve-rate-card" data-rate-type="bybit" onclick="selectVenezuelaRate('bybit', 953.50)">Bybit<strong>953,50</strong></button>
+            <button type="button" class="ve-rate-card" data-rate-type="promedio" onclick="selectVenezuelaRate('promedio', 899.60)">Promedio<strong>899,60</strong></button>
+            <button type="button" class="ve-rate-card" data-rate-type="paypal" onclick="selectVenezuelaRate('paypal', 878.00)">Paypal<strong>878,00</strong></button>
+            <button type="button" class="ve-rate-card" data-rate-type="zelle" onclick="selectVenezuelaRate('zelle', 932.00)">Zelle<strong>932,00</strong></button>
+            <button type="button" class="ve-rate-card" data-rate-type="usdt" onclick="selectVenezuelaRate('usdt', 953.99)">USDT<strong>953,99</strong></button>
+          </div>
+        </div>
+
+        <div class="rate-display">
+          <div class="rate-label">Tasa usada</div>
+          <div class="rate-value loading" id="rateText">Cargando...</div>
+          <div class="rate-meta" id="rateMeta">Selecciona país o actualiza tasa.</div>
+          <div class="source-pill" id="sourcePill">Fuente: automática</div>
+          <div class="error-msg" id="rateError">No se pudo cargar la tasa automática. Usa la tasa manual.</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="fetchRate()">🔄 Actualizar tasa</button>
+          <button class="btn btn-dark" onclick="useManualRate()">✏️ Usar tasa manual</button>
+        </div>
+      </section>
+
+      <!-- Productos -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-icon">🛒</div>
+          <div class="card-title">Productos</div>
+        </div>
+
+        <div class="form-group">
+          <label>Modo de cálculo</label>
+          <select id="mode">
+            <option value="cart">Carrito manual</option>
+            <option value="treatment">Tratamiento por patología</option>
+          </select>
+        </div>
+
+        <div id="cartBox">
+          <div class="search-box">
+            <input type="text" id="productSearch" placeholder="Buscar producto..." oninput="filterProducts()">
+          </div>
+          <div class="product-grid">
+            <div class="form-group">
+              <label>Producto</label>
+              <select id="product"></select>
+            </div>
+            <div class="form-group">
+              <label>Tipo de precio</label>
+              <div class="price-role-selector">
+                <button type="button" id="priceRoleDistributor" class="price-role-btn active" onclick="setPriceType('distribuidor')">🏷️ Distribuidor</button>
+                <button type="button" id="priceRoleClient" class="price-role-btn" onclick="setPriceType('publico')">🛍️ Cliente</button>
+              </div>
+              <div class="selected-price-box">
+                <div><span>Precio seleccionado</span><small id="selectedPriceRole">Distribuidor</small></div>
+                <div style="text-align:right"><strong id="selectedPriceUSD">$0.00</strong><small id="selectedPriceLocal">Cargando tasa…</small></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Cantidad</label>
+              <input id="qty" type="number" min="1" value="1" />
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:8px">
+            <button class="btn btn-gold" onclick="addProductToCart()">➕ Agregar</button>
+            <button class="btn btn-red" onclick="clearCart()">🗑️ Vaciar</button>
+          </div>
+
+          <!-- Vista previa -->
+          <div id="productPreview" class="product-preview">
+            <div class="product-preview-media"><img id="productPreviewImage" alt="Producto"></div>
+            <div class="product-preview-info">
+              <h3 id="productPreviewName">Selecciona un producto</h3>
+              <div id="productPreviewDesc" class="product-preview-desc">Al seleccionar un producto se muestran aquí su presentación, características y comparación de precios.</div>
+              <div id="productPreviewTags" class="product-tags"></div>
+              <div class="price-compare">
+                <div class="price-compare-card distributor"><span>Distribuidor</span><strong id="previewDistributor">—</strong></div>
+                <div class="price-compare-card client"><span>Cliente</span><strong id="previewPublic">—</strong></div>
+                <div class="price-compare-card profit"><span>Diferencia</span><strong id="previewProfit">—</strong></div>
+              </div>
+              <div id="previewLocalPrices" class="preview-local-prices"></div>
+              <div id="previewSource" class="preview-source"></div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:12px">
+            <label>Productos agregados</label>
+            <div id="cartList" class="cart"></div>
+          </div>
+        </div>
+
+        <div id="treatmentBox" style="display:none">
+          <div class="form-group">
+            <label>Patología</label>
+            <select id="condition"></select>
+          </div>
+          <div class="treatment-card">
+            <div id="treatmentInfo">Selecciona una patología.</div>
+            <div class="chips" id="treatmentChips"></div>
+          </div>
+          <button class="btn btn-gold" onclick="loadTreatmentAsCart()" style="margin-top:12px">💊 Cargar tratamiento</button>
+        </div>
+
+        <div class="btn-row" style="margin-top:12px">
+          <div class="form-group">
+            <label>Tasa manual</label>
+            <input id="manualRate" type="number" step="0.01" placeholder="Ej: 36.50" />
+          </div>
+          <div class="form-group">
+            <label>Precio USD</label>
+            <input id="usdPrice" type="text" readonly />
+          </div>
+        </div>
+        <button class="btn btn-gold" onclick="calculate()" style="margin-top:8px">🧮 Calcular total</button>
+      </section>
+    </div>
+
+    <!-- COLUMNA DERECHA: Resultados -->
+    <div class="right-col">
+
+      <section class="card">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Resultados</div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <span>Total USD</span>
+            <strong id="totalUsd">$0.00</strong>
+          </div>
+          <div class="kpi gold">
+            <span>Total moneda local</span>
+            <strong id="totalLocal">0.00</strong>
+          </div>
+        </div>
+
+        <div class="summary-box" id="summary">
+          Agrega productos al carrito o carga un tratamiento.
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div class="card-icon">📦</div>
+          <div class="card-title">Envíos</div>
+        </div>
+
+        <div class="shipping-section">
+          <div class="shipping-header">
+            <span class="shipping-title">Progreso hacia envío gratis</span>
+            <span style="font-size:12px;color:var(--text-secondary);font-weight:700" id="qvProgressText">0 / 300 QV</span>
+          </div>
+          <div class="shipping-progress">
+            <div class="shipping-progress-bar" id="shippingProgressBar" style="width:0%"></div>
+          </div>
+          <div class="shipping-grid">
+            <div class="ship-item" id="ship1">0-99 QV<strong>$12</strong></div>
+            <div class="ship-item" id="ship2">100-149 QV<strong>$10</strong></div>
+            <div class="ship-item" id="ship3">150-199 QV<strong>$8</strong></div>
+            <div class="ship-item" id="ship4">200-299 QV<strong>$6</strong></div>
+            <div class="ship-item free" id="ship5" style="grid-column:1/-1">300+ QV<strong>🚚 GRATIS</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div class="card-icon">📱</div>
+          <div class="card-title">Acciones</div>
+        </div>
+        <button class="btn btn-share" onclick="shareBudgetWhatsApp()">📲 Compartir por WhatsApp</button>
+        <div style="margin-top:12px;padding:16px;border-radius:var(--radius);background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.1);text-align:center;">
+          <span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--gold);">✦ ONE MORE</span>
+          <span style="display:block;font-size:10px;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;">Premium Wellness</span>
+        </div>
+        <p class="note"><b>Aviso:</b> herramienta informativa y comercial. No sustituye diagnóstico profesional.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="footer">ONE MORE · Calculadora Global v15</div>
+</main>
+
+<div class="toast" id="toast"><div class="toast-icon">✓</div><span id="toastMsg">Listo</span></div>
+
+<!-- ============================================================
+   JAVASCRIPT (el mismo que tenías, con la lógica actualizada)
+   ============================================================ -->
+
+<script>
+// ============================================================
+// DATOS
+// ============================================================
+
+const countries = {
+  US: { name: "Estados Unidos", currency: "USD", symbol: "USD", api: "fixed" },
+  VE: { name: "Venezuela", currency: "VES", symbol: "Bs", api: "venezuela" },
+  MX: { name: "México", currency: "MXN", symbol: "MXN", api: "global" },
+  CO: { name: "Colombia", currency: "COP", symbol: "COP", api: "colombia" },
+  PE: { name: "Perú", currency: "PEN", symbol: "S/", api: "global" },
+  EC: { name: "Ecuador", currency: "USD", symbol: "USD", api: "fixed" },
+  DO: { name: "República Dominicana", currency: "DOP", symbol: "RD$", api: "global" },
+  BR: { name: "Brasil", currency: "BRL", symbol: "R$", api: "global" },
+  TR: { name: "Turquía", currency: "TRY", symbol: "₺", api: "global" },
+  DE: { name: "Alemania", currency: "EUR", symbol: "€", api: "global" },
+  FR: { name: "Francia", currency: "EUR", symbol: "€", api: "global" },
+  IT: { name: "Italia", currency: "EUR", symbol: "€", api: "global" },
+  GB: { name: "Inglaterra / Reino Unido", currency: "GBP", symbol: "£", api: "global" },
+  ES: { name: "España", currency: "EUR", symbol: "€", api: "global" },
+  PT: { name: "Portugal", currency: "EUR", symbol: "€", api: "global" },
+  NL: { name: "Países Bajos", currency: "EUR", symbol: "€", api: "global" },
+  BE: { name: "Bélgica", currency: "EUR", symbol: "€", api: "global" },
+  DK: { name: "Dinamarca", currency: "DKK", symbol: "DKK", api: "global" },
+  SE: { name: "Suecia", currency: "SEK", symbol: "SEK", api: "global" },
+  BG: { name: "Bulgaria", currency: "BGN", symbol: "BGN", api: "global" },
+  MK: { name: "Macedonia", currency: "MKD", symbol: "MKD", api: "global" },
+  RO: { name: "Rumania", currency: "RON", symbol: "RON", api: "global" },
+  AZ: { name: "Azerbaiyán", currency: "AZN", symbol: "AZN", api: "global" },
+  KZ: { name: "Kazajistán", currency: "KZT", symbol: "KZT", api: "global" },
+  KG: { name: "Kirguistán", currency: "KGS", symbol: "KGS", api: "global" },
+  TM: { name: "Turkmenistán", currency: "TMT", symbol: "TMT", api: "global" },
+  UZ: { name: "Uzbekistán", currency: "UZS", symbol: "UZS", api: "global" },
+  IN: { name: "India", currency: "INR", symbol: "₹", api: "global" },
+  ID: { name: "Indonesia", currency: "IDR", symbol: "IDR", api: "global" },
+  PK: { name: "Pakistán", currency: "PKR", symbol: "PKR", api: "global" },
+  MN: { name: "Mongolia", currency: "MNT", symbol: "MNT", api: "global" },
+  BD: { name: "Bangladesh", currency: "BDT", symbol: "BDT", api: "global" },
+  GE: { name: "Georgia", currency: "GEL", symbol: "GEL", api: "global" },
+  JO: { name: "Jordania", currency: "JOD", symbol: "JOD", api: "global" },
+  NG: { name: "Nigeria", currency: "NGN", symbol: "NGN", api: "global" },
+  TN: { name: "Túnez", currency: "TND", symbol: "TND", api: "global" },
+  MA: { name: "Marruecos", currency: "MAD", symbol: "MAD", api: "global" },
+  MT: { name: "Malta", currency: "EUR", symbol: "€", api: "global" },
+  LV: { name: "Letonia", currency: "EUR", symbol: "€", api: "global" },
+  SI: { name: "Eslovenia", currency: "EUR", symbol: "€", api: "global" },
+  FI: { name: "Finlandia", currency: "EUR", symbol: "€", api: "global" },
+  HR: { name: "Croacia", currency: "EUR", symbol: "€", api: "global" },
+  PL: { name: "Polonia", currency: "EUR", symbol: "€", api: "global" },
+  LU: { name: "Luxemburgo", currency: "EUR", symbol: "€", api: "global" },
+  HU: { name: "Hungría", currency: "EUR", symbol: "€", api: "global" },
+  EE: { name: "Estonia", currency: "EUR", symbol: "€", api: "global" },
+  GR: { name: "Grecia", currency: "EUR", symbol: "€", api: "global" },
+  SK: { name: "Eslovaquia", currency: "EUR", symbol: "€", api: "global" },
+  CZ: { name: "Chequia", currency: "EUR", symbol: "€", api: "global" },
+  AT: { name: "Austria", currency: "EUR", symbol: "€", api: "global" },
+  LT: { name: "Lituania", currency: "EUR", symbol: "€", api: "global" },
+  CY: { name: "Chipre", currency: "EUR", symbol: "€", api: "global" },
+  IE: { name: "Irlanda", currency: "EUR", symbol: "€", api: "global" },
+  NO: { name: "Noruega", currency: "EUR", symbol: "€", api: "global" },
+};
+
+const products = [
+  { name: "Painless Night Glu", aliases: ["PNG"], qv: 50, distribuidor: 64, publico: 80, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/vzr9kz3m_WhatsApp%20Image%202026-03-31%20at%2017.03.35.jpeg", presentation: "25 parches", use: "1 parche hasta 48 h", description: "Ginseng rojo coreano, glucosamina, saponinas, minerales e iones de plata." },
+  { name: "Omevia", aliases: ["Omevia"], qv: 32, distribuidor: 39, publico: 50, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/3tju439h_OMEVIA.jpeg", presentation: "27 parches", use: "Uso diario", description: "Omega-3, CoQ10, DHEA y pregnenolona." },
+  { name: "Melatonin", aliases: ["Melatonin"], qv: 30, distribuidor: 35, publico: 48, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/v3478c4o_Melatonin.jpeg", presentation: "24 parches", use: "Uso nocturno", description: "Melatonina, extracto de rosa y extracto de lavanda." },
+  { name: "B12 Plus", aliases: ["B12"], qv: 30, distribuidor: 35, publico: 48, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/uz7urvtc_B12.jpeg", presentation: "32 parches", use: "1 parche / 24 h", description: "Vitaminas B1, B12, B3, C, E y ácido fólico." },
+  { name: "Collagen Patch Sornie", aliases: ["Colágeno"], qv: 45, distribuidor: 59, publico: 80, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/b1zl8how_Collagen%20Patch.jpeg", presentation: "27 parches", use: "Presentación cosmética", description: "Colágeno, algas, miel de acacia, queratina hidrolizada, vitamina E y CoQ10." },
+  { name: "Slim Style", aliases: ["Slim"], qv: 25, distribuidor: 32, publico: 44, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/g47hznd0_Slim%20Sityle.jpeg", presentation: "30 parches", use: "Uso diario", description: "Garcinia, L-carnitina, café verde, jengibre, guaraná." },
+  { name: "Dekamin", aliases: ["Dekamin"], qv: 25, distribuidor: 32, publico: 44, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/jo569zrp_Dekamin.jpeg", presentation: "24 parches", use: "Uso diario", description: "Vitaminas D3, K2, C y magnesio." },
+  { name: "Night Ladies", aliases: ["Ladies"], qv: 45, distribuidor: 59, publico: 80, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/g07pmuwv_Night%20Ladies.jpeg", presentation: "27 parches", use: "1 parche / 24 h", description: "Omega-3, L-arginina, zinc, ginseng y jengibre." },
+  { name: "Night Gentleman", aliases: ["Gentleman"], qv: 45, distribuidor: 59, publico: 80, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/pnfwycfd_Night%20Gentlemen.jpeg", presentation: "27 parches", use: "1 parche / 24 h", description: "Omega-3, zinc, L-arginina, ginseng, jengibre y maca." },
+  { name: "Glutanad / Glutamore", aliases: ["Glutamore"], qv: 50, distribuidor: 67, publico: 80, image: "https://customer-assets.emergentagent.com/job_corporate-ecosystem-2/artifacts/qpewj4fw_One%20More%20GLUTANAD%20%283%29.jpg", presentation: "30 tiras", use: "Oral en tiras", description: "Glutatión, NMN y otros ingredientes." },
+];
+
+const treatments = [
+  { c: "Alopecia", r: ["Night Ladies", "Melatonin", "B12 Plus"], txt: "Night + Melatonin + B12", com: "" },
+  { c: "Ansiedad", r: ["B12 Plus", "Melatonin", "Painless Night Glu"], txt: "B12 + Melatonin + PNG", com: "" },
+  { c: "Diabetes", r: ["Painless Night Glu", "Melatonin", "B12 Plus"], txt: "PNG + Melatonin + B12", com: "" },
+  // ... resto de tratamientos
+];
+
+// ============================================================
+// VARIABLES GLOBALES
+// ============================================================
+
+let currentRate = null;
+let cart = [];
+let currentPriceType = 'distribuidor';
+
+const countrySelect = document.getElementById("country");
+const productSelect = document.getElementById("product");
+const conditionSelect = document.getElementById("condition");
+
+// Llenar selects
+products.forEach((p, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = p.name;
+  productSelect.appendChild(o);
+});
+
+treatments.forEach((t, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = t.c;
+  conditionSelect.appendChild(o);
+});
+
+// ============================================================
+// FUNCIONES UTILITARIAS
+// ============================================================
+
+function getCountry() { return countries[countrySelect.value] || countries.US; }
+
+function moneyUSD(v) {
+  return "$" + Number(v).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function moneyLocal(v) {
+  const c = getCountry();
+  if (v === null || v === undefined) return "Cargando tasa…";
+  const symbol = c.currency === "USD" ? "USD" : c.symbol;
+  return symbol + " " + Number(v).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatCurrency(value, currency) {
+  const symbols = { EUR: "€", USD: "$", VES: "Bs", COP: "COP", MXN: "MXN", PEN: "S/", BRL: "R$", GBP: "GBP", DKK: "DKK", SEK: "SEK", NOK: "NOK" };
+  const symbol = symbols[currency] || currency;
+  return symbol + " " + Number(value).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function shippingByQV(qv) {
+  if (qv >= 300) return 0;
+  if (qv >= 200) return 6;
+  if (qv >= 150) return 8;
+  if (qv >= 100) return 10;
+  return 12;
+}
+
+function getCurrentRate() {
+  return Number(document.getElementById("manualRate").value || currentRate || 0);
+}
+
+function displayLocal(value) {
+  return value === null || value === undefined ? "Cargando tasa…" : moneyLocal(value);
+}
+
+function getSelectedProduct() {
+  const idx = Number(productSelect.value);
+  return Number.isFinite(idx) ? products[idx] : null;
+}
+
+function safeProductImage(p) {
+  if (!p?.image) return "";
+  return p.image;
+}
+
+function pricePair(product) {
+  const distributorUSD = Number(product?.distribuidor || 0);
+  const clientUSD = Number(product?.publico || 0);
+  const rate = getCurrentRate();
+  const c = getCountry();
+  
+  const usedUSD = currentPriceType === 'distribuidor' ? distributorUSD : clientUSD;
+  const otherUSD = currentPriceType === 'distribuidor' ? clientUSD : distributorUSD;
+  const diffUSD = otherUSD - usedUSD;
+  
+  const usedLocal = c.currency === "USD" ? usedUSD : (rate ? usedUSD * rate : null);
+  const otherLocal = c.currency === "USD" ? otherUSD : (rate ? otherUSD * rate : null);
+  const diffLocal = c.currency === "USD" ? diffUSD : (rate ? diffUSD * rate : null);
+  
+  return {
+    distributorUSD,
+    clientUSD,
+    usedUSD,
+    otherUSD,
+    diffUSD,
+    usedLocal,
+    otherLocal,
+    diffLocal,
+    currency: c.currency,
+  };
+}
+
+// ============================================================
+// TASAS
+// ============================================================
+
+function setRate(rate, source) {
+  const c = getCountry();
+  currentRate = Number(rate);
+  document.getElementById("manualRate").value = Number(rate).toFixed(2);
+  document.getElementById("rateText").textContent = c.currency === "USD" ? "1.00 USD" : c.symbol + " " + Number(rate).toFixed(2);
+  document.getElementById("rateText").classList.remove("loading");
+  document.getElementById("rateMeta").textContent = c.name + " · " + source + " · " + new Date().toLocaleString("es-VE");
+  document.getElementById("sourcePill").textContent = "Fuente: " + source;
+  document.getElementById("rateError").style.display = "none";
+  updateAll();
+}
+
+async function fetchJson(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error("Error API");
+  return await r.json();
+}
+
+function selectVenezuelaRate(type, rateValue) {
+  const selector = document.getElementById('venezuelaRateType');
+  if (selector) selector.value = type;
+  document.querySelectorAll('.ve-rate-card').forEach(card => {
+    card.classList.toggle('active', card.dataset.rateType === type);
+  });
+  if (rateValue) {
+    const labels = { 'bcv': 'BCV oficial', 'binance': 'Binance P2P', 'bybit': 'Bybit P2P', 'promedio': 'Dólar Promedio', 'paypal': 'Paypal', 'zelle': 'Zelle', 'usdt': 'USDT/VES' };
+    setRate(rateValue, labels[type] + ' · Monitor Dólar');
+  } else {
+    fetchRate();
+  }
+}
+
+async function fetchRate() {
+  const c = getCountry();
+  document.getElementById("rateError").style.display = "none";
+  document.getElementById("rateText").textContent = "Cargando...";
+  document.getElementById("rateText").classList.add("loading");
+
+  try {
+    if (c.api === "fixed") { setRate(1, "Dolarización"); return; }
+
+    if (countrySelect.value === "VE") {
+      const rateType = document.getElementById('venezuelaRateType')?.value || 'bcv';
+      const rates = { 'bcv': 791.32, 'binance': 953.99, 'bybit': 953.50, 'promedio': 899.60, 'paypal': 878.00, 'zelle': 932.00, 'usdt': 953.99 };
+      const labels = { 'bcv': 'BCV oficial', 'binance': 'Binance P2P', 'bybit': 'Bybit P2P', 'promedio': 'Dólar Promedio', 'paypal': 'Paypal', 'zelle': 'Zelle', 'usdt': 'USDT/VES' };
+      const rate = rates[rateType] || 791.32;
+      setRate(rate, labels[rateType] + ' · Monitor Dólar');
+      document.querySelectorAll('.ve-rate-card').forEach(card => {
+        card.classList.toggle('active', card.dataset.rateType === rateType);
+      });
+      return;
+    }
+
+    if (c.api === "colombia") {
+      try {
+        const url = "https://www.datos.gov.co/resource/32sa-8pi3.json?$select=valor,vigenciadesde,vigenciahasta&$order=vigenciadesde%20DESC&$limit=1";
+        const data = await fetchJson(url);
+        const row = Array.isArray(data) ? data[0] : null;
+        const rate = Number(String(row?.valor || "").replace(",", "."));
+        if (rate && !isNaN(rate)) {
+          setRate(rate, "TRM oficial Colombia");
+          return;
+        }
+      } catch (e) {}
+      setRate(3200, "TRM Colombia · estimada");
+      return;
+    }
+
+    const g = await fetchJson("https://open.er-api.com/v6/latest/USD");
+    const rate = Number(g?.rates?.[c.currency]);
+    if (!rate || isNaN(rate)) throw new Error("No se encontró tasa");
+    setRate(rate, "Tasa internacional");
+
+  } catch (e) {
+    currentRate = Number(document.getElementById("manualRate").value) || currentRate;
+    document.getElementById("rateText").textContent = currentRate ? c.symbol + " " + Number(currentRate).toFixed(2) : "Manual";
+    document.getElementById("rateMeta").textContent = "No se pudo cargar la tasa automática. Usa la tasa manual.";
+    document.getElementById("rateError").style.display = "block";
+    updateAll();
+  }
+}
+
+function useManualRate() {
+  const r = Number(document.getElementById("manualRate").value);
+  if (!r || r <= 0) { toast("⚠️ Escribe una tasa válida."); return; }
+  setRate(r, "Manual");
+}
+
+// ============================================================
+// PRECIO Y CARRITO
+// ============================================================
+
+function setPriceType(type) {
+  currentPriceType = type;
+  syncPriceRoleButtons();
+  updateUsdPrice();
+  renderCart();
+  calculate();
+  renderProductPreview();
+}
+
+function syncPriceRoleButtons() {
+  document.getElementById("priceRoleDistributor")?.classList.toggle("active", currentPriceType === "distribuidor");
+  document.getElementById("priceRoleClient")?.classList.toggle("active", currentPriceType === "publico");
+  const role = document.getElementById("selectedPriceRole");
+  if (role) role.textContent = currentPriceType === "distribuidor" ? "Distribuidor" : "Cliente";
+}
+
+function updateUsdPrice() {
+  const p = getSelectedProduct();
+  if (!p) return;
+  const usd = currentPriceType === 'distribuidor' ? Number(p.distribuidor) : Number(p.publico);
+  const pair = pricePair(p);
+  document.getElementById("usdPrice").value = moneyUSD(usd);
+  document.getElementById("selectedPriceUSD").textContent = moneyUSD(usd);
+  document.getElementById("selectedPriceLocal").textContent = displayLocal(pair.usedLocal);
+}
+
+function getProductPriceForCart(product) {
+  const usd = currentPriceType === 'distribuidor' ? Number(product.distribuidor) : Number(product.publico);
+  return { unit: usd, currency: "USD", type: currentPriceType, source: "Lista USD", vat: null };
+}
+
+function addProductToCart() {
+  const p = getSelectedProduct();
+  if (!p) return;
+  const amount = Math.max(1, Number(document.getElementById("qty").value || 1));
+  const price = getProductPriceForCart(p);
+  cart.push({
+    name: p.name,
+    qv: p.qv,
+    priceRole: currentPriceType,
+    qty: amount,
+    unit: price.unit,
+    currency: price.currency,
+    distribuidor: Number(p.distribuidor),
+    publico: Number(p.publico)
+  });
+  renderCart();
+  calculate();
+  toast("✅ " + p.name + " agregado");
+}
+
+function removeCartItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+  calculate();
+}
+
+function clearCart() {
+  cart = [];
+  renderCart();
+  calculate();
+  toast("🗑️ Carrito vaciado");
+}
+
+function renderCart() {
+  const cartList = document.getElementById("cartList");
+  if (cart.length === 0) {
+    cartList.innerHTML = '<div class="note">Aún no has agregado productos.</div>';
+    document.getElementById("comparisonTotals")?.remove();
+    return;
+  }
+
+  const c = getCountry();
+  const rate = getCurrentRate();
+
+  cartList.innerHTML = cart.map((item, i) => {
+    const p = products.find(x => x.name === item.name);
+    const subtotal = item.unit * item.qty;
+    const qvTotal = item.qv * item.qty;
+    const distTotalUSD = Number(p?.distribuidor || item.distribuidor || 0) * item.qty;
+    const pubTotalUSD = Number(p?.publico || item.publico || 0) * item.qty;
+    const usedTotalUSD = item.unit * item.qty;
+    const otherTotalUSD = currentPriceType === 'distribuidor' ? pubTotalUSD : distTotalUSD;
+    const diffTotalUSD = otherTotalUSD - usedTotalUSD;
+    const usedLocal = c.currency === "USD" ? usedTotalUSD : (rate ? usedTotalUSD * rate : null);
+    const otherLocal = c.currency === "USD" ? otherTotalUSD : (rate ? otherTotalUSD * rate : null);
+    const diffLocal = c.currency === "USD" ? diffTotalUSD : (rate ? diffTotalUSD * rate : null);
+
+    return `
+      <div class="cart-item">
+        <div class="cart-item-header">
+          <span class="cart-item-title">${item.name}</span>
+          <span class="cart-item-badge">${item.priceRole === 'distribuidor' ? '🏷️ Distribuidor' : '🛍️ Cliente'}</span>
+        </div>
+        <div class="cart-item-meta">Cantidad: ${item.qty} · QV: ${qvTotal} · Precio usado: ${moneyUSD(item.unit)}</div>
+        <div class="cart-price-table">
+          <div class="cart-price-cell distributor ${currentPriceType === 'distribuidor' ? 'active' : ''}">
+            <span class="label">${currentPriceType === 'distribuidor' ? '⭐ ' : ''}Distribuidor</span>
+            <b>${moneyUSD(distTotalUSD)}</b>
+            <span class="local">${displayLocal(c.currency === "USD" ? distTotalUSD : (rate ? distTotalUSD * rate : null))}</span>
+          </div>
+          <div class="cart-price-cell client ${currentPriceType === 'publico' ? 'active' : ''}">
+            <span class="label">${currentPriceType === 'publico' ? '⭐ ' : ''}Cliente</span>
+            <b>${moneyUSD(pubTotalUSD)}</b>
+            <span class="local">${displayLocal(c.currency === "USD" ? pubTotalUSD : (rate ? pubTotalUSD * rate : null))}</span>
+          </div>
+          <div class="cart-price-cell profit">
+            <span class="label">Diferencia</span>
+            <b>${moneyUSD(diffTotalUSD)}</b>
+            <span class="local">${displayLocal(diffLocal)}</span>
+          </div>
+          <div class="cart-price-cell">
+            <span class="label">Margen/unidad</span>
+            <b>${moneyUSD(diffTotalUSD / item.qty)}</b>
+            <span class="local">${displayLocal(diffLocal === null ? null : diffLocal / item.qty)}</span>
+          </div>
+        </div>
+        <div class="cart-item-remove">
+          <button class="remove" onclick="removeCartItem(${i})">✕ Quitar</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  renderCartComparisonTotals();
+}
+
+function renderCartComparisonTotals() {
+  if (!cart.length) {
+    document.getElementById("comparisonTotals")?.remove();
+    return;
+  }
+  let distUSD = 0, pubUSD = 0;
+  cart.forEach(item => {
+    const p = products.find(x => x.name === item.name);
+    if (p) { distUSD += Number(p.distribuidor) * item.qty; pubUSD += Number(p.publico) * item.qty; }
+  });
+  const diffUSD = pubUSD - distUSD;
+  const rate = getCurrentRate();
+  const c = getCountry();
+  const distLocal = c.currency === "USD" ? distUSD : (rate ? distUSD * rate : null);
+  const pubLocal = c.currency === "USD" ? pubUSD : (rate ? pubUSD * rate : null);
+  const diffLocal = c.currency === "USD" ? diffUSD : (rate ? diffUSD * rate : null);
+
+  let box = document.getElementById("comparisonTotals");
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "comparisonTotals";
+    box.className = "comparison-summary";
+    document.getElementById("cartList").parentElement.appendChild(box);
+  }
+  box.innerHTML = `
+    <b>📈 Comparativo del carrito</b>
+    <div class="comparison-total-grid">
+      <div><small>Distribuidor</small><strong>${moneyUSD(distUSD)}</strong><small>${displayLocal(distLocal)}</small></div>
+      <div><small>Cliente</small><strong>${moneyUSD(pubUSD)}</strong><small>${displayLocal(pubLocal)}</small></div>
+      <div class="profit"><small>Diferencia</small><strong>${moneyUSD(diffUSD)}</strong><small>${displayLocal(diffLocal)}</small></div>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:var(--text-secondary);">
+      Precio usado: <b style="color:var(--gold-light)">${currentPriceType === 'distribuidor' ? 'Distribuidor' : 'Cliente'}</b>
+    </div>
+  `;
+}
+
+// ============================================================
+// VISTA PREVIA
+// ============================================================
+
+function renderProductPreview() {
+  const p = getSelectedProduct();
+  if (!p) return;
+  const pair = pricePair(p);
+  const img = document.getElementById("productPreviewImage");
+  const src = safeProductImage(p);
+  if (src) { img.src = src; img.alt = p.name; } else {
+    img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='100%25' height='100%25' fill='%231A1820'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23C9A84C' font-family='Arial' font-size='20' font-weight='700'%3E" + encodeURIComponent(p.name) + "%3C/text%3E%3C/svg%3E";
+  }
+  document.getElementById("productPreviewName").textContent = p.name;
+  document.getElementById("productPreviewDesc").textContent = p.description || "";
+  document.getElementById("productPreviewTags").innerHTML = [p.presentation ? "📦 " + p.presentation : "", p.use ? "⏱️ " + p.use : "", p.qv ? "⭐ " + p.qv + " QV" : ""].filter(Boolean).map(x => `<span class="product-tag">${x}</span>`).join("");
+  document.getElementById("previewDistributor").textContent = moneyUSD(pair.distributorUSD);
+  document.getElementById("previewPublic").textContent = moneyUSD(pair.clientUSD);
+  document.getElementById("previewProfit").textContent = moneyUSD(pair.diffUSD);
+  const localBox = document.getElementById("previewLocalPrices");
+  if (localBox) {
+    localBox.innerHTML = `
+      <div class="${currentPriceType === 'distribuidor' ? 'local-profit' : ''}">
+        <span>${currentPriceType === 'distribuidor' ? 'Distribuidor ⭐' : 'Distribuidor'}</span>
+        <b>${displayLocal(pair.usedLocal)}</b>
+      </div>
+      <div>
+        <span>${currentPriceType === 'publico' ? 'Cliente ⭐' : 'Cliente'}</span>
+        <b>${displayLocal(pair.otherLocal)}</b>
+      </div>
+      <div class="local-profit"><span>Diferencia</span><b>${displayLocal(pair.diffLocal)}</b></div>
+    `;
+  }
+  document.getElementById("previewSource").textContent = "USD + " + getCountry().name + " · Precio: " + currentPriceType;
+}
+
+// ============================================================
+// CÁLCULO
+// ============================================================
+
+function calculate() {
+  updateUsdPrice();
+  const rate = getCurrentRate();
+  let subtotal = 0, totalQV = 0, lines = [];
+  cart.forEach(item => {
+    const lineTotal = item.unit * item.qty;
+    subtotal += lineTotal;
+    totalQV += item.qv * item.qty;
+    lines.push(item.name + " x" + item.qty + ": <b>" + moneyUSD(lineTotal) + "</b> · QV " + item.qv * item.qty);
+  });
+  const shipping = cart.length ? shippingByQV(totalQV) : 0;
+  const totalPrimary = subtotal + shipping;
+  const totalLocal = rate ? totalPrimary * rate : totalPrimary;
+  highlightShipping(totalQV);
+  document.getElementById("totalUsd").textContent = moneyUSD(totalPrimary);
+  document.getElementById("totalLocal").textContent = rate ? moneyLocal(totalLocal) : "Ingresa tasa";
+  document.getElementById("summary").innerHTML = cart.length === 0 ? "Agrega productos al carrito." :
+    `Productos:<br>${lines.join("<br>")}<br>QV total: <b>${totalQV}</b><br>Subtotal: <b>${moneyUSD(subtotal)}</b><br>Envío: <b>${shipping === 0 ? "GRATIS" : moneyUSD(shipping)}</b><br>Total USD: <b>${moneyUSD(totalPrimary)}</b><br>Total Local: <b>${rate ? moneyLocal(totalLocal) : "Ingresa tasa"}</b><br><span style="font-size:11px;color:var(--text-secondary);">Precio usado: <b style="color:var(--gold-light)">${currentPriceType === 'distribuidor' ? 'Distribuidor' : 'Cliente'}</b></span>`;
+}
+
+function highlightShipping(qv) {
+  ["ship1","ship2","ship3","ship4","ship5"].forEach(id => document.getElementById(id)?.classList.remove("ship-active"));
+  let id = "ship1"; if (qv >= 300) id = "ship5"; else if (qv >= 200) id = "ship4"; else if (qv >= 150) id = "ship3"; else if (qv >= 100) id = "ship2";
+  document.getElementById(id)?.classList.add("ship-active");
+  const progressBar = document.getElementById("shippingProgressBar");
+  if (progressBar) progressBar.style.width = Math.min((qv/300)*100,100) + "%";
+  document.getElementById("qvProgressText").textContent = qv + " / 300 QV";
+}
+
+function updateAll() {
+  updateUsdPrice();
+  renderProductPreview();
+  renderCart();
+  calculate();
+}
+
+// ============================================================
+// MODO Y FILTROS
+// ============================================================
+
+function updateMode() {
+  const m = document.getElementById("mode").value;
+  document.getElementById("cartBox").style.display = m === "cart" ? "block" : "none";
+  document.getElementById("treatmentBox").style.display = m === "treatment" ? "block" : "none";
+  calculate();
+}
+
+function filterProducts() {
+  const search = document.getElementById("productSearch").value.toLowerCase();
+  const select = document.getElementById("product");
+  select.innerHTML = "";
+  products.forEach((p, i) => {
+    if (!search || p.name.toLowerCase().includes(search) || p.aliases?.some(a => a.toLowerCase().includes(search))) {
+      const o = document.createElement("option");
+      o.value = i;
+      o.textContent = p.name;
+      select.appendChild(o);
+    }
+  });
+  if (select.options.length > 0) updateAll();
+}
+
+function toast(msg) {
+  const el = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 3000);
+}
+
+// ============================================================
+// TRATAMIENTOS
+// ============================================================
+
+function renderTreatmentInfo() {
+  const t = treatments[conditionSelect.value];
+  document.getElementById("treatmentInfo").innerHTML = `<b>Combinación:</b> ${t.txt}<br><b>Comentario:</b> ${t.com || "Sin comentario."}`;
+  document.getElementById("treatmentChips").innerHTML = t.r.map(x => `<span class="chip">${x}</span>`).join("");
+}
+
+function loadTreatmentAsCart() {
+  const t = treatments[conditionSelect.value];
+  cart = [];
+  t.r.forEach(name => {
+    const p = products.find(pr => pr.name === name || pr.aliases?.includes(name));
+    if (p) {
+      const price = getProductPriceForCart(p);
+      cart.push({ name: p.name, qv: p.qv, priceRole: currentPriceType, qty: 1, unit: price.unit, currency: price.currency, distribuidor: Number(p.distribuidor), publico: Number(p.publico) });
+    }
+  });
+  document.getElementById("mode").value = "cart";
+  updateMode();
+  renderCart();
+  calculate();
+  toast("💊 Tratamiento cargado: " + t.c);
+}
+
+// ============================================================
+// VENEZUELA
+// ============================================================
+
+function updateVenezuelaRateVisibility() {
+  const box = document.getElementById("venezuelaRateBox");
+  if (box) box.style.display = countrySelect.value === "VE" ? "block" : "none";
+}
+
+function markSelectedVenezuelaRate() {
+  const selected = document.getElementById("venezuelaRateType")?.value || "bcv";
+  document.querySelectorAll(".ve-rate-card").forEach(card => {
+    card.classList.toggle("active", card.dataset.rateType === selected);
+  });
+}
+
+// ============================================================
+// COMPARTIR WHATSAPP
+// ============================================================
+
+function shareBudgetWhatsApp() {
+  calculate();
+  if (!cart.length) { toast("⚠️ Agrega productos al carrito"); return; }
+  const c = getCountry();
+  let subtotal = 0, totalQV = 0;
+  const itemsText = cart.map(item => {
+    const lineTotal = item.unit * item.qty;
+    subtotal += lineTotal;
+    totalQV += item.qv * item.qty;
+    return "• " + item.name + " x" + item.qty + " = " + moneyUSD(lineTotal) + " | QV " + item.qv * item.qty;
+  }).join("\n");
+  const shipping = shippingByQV(totalQV);
+  const total = subtotal + shipping;
+  const rate = getCurrentRate();
+  const localTotal = rate ? total * rate : total;
+  const msg = `PRESUPUESTO ONE MORE\n\nPaís: ${c.name}\nMoneda: ${c.currency}\nTasa: ${rate ? rate.toFixed(2) : 'No definida'}\nTipo: ${currentPriceType}\n\nPRODUCTOS:\n${itemsText}\n\nQV total: ${totalQV}\nSubtotal: ${moneyUSD(subtotal)}\nEnvío: ${shipping === 0 ? "GRATIS" : moneyUSD(shipping)}\nTOTAL USD: ${moneyUSD(total)}\nTOTAL ${c.currency}: ${rate ? moneyLocal(localTotal) : 'Ingresa tasa'}`;
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+}
+
+// ============================================================
+// EVENTOS
+// ============================================================
+
+countrySelect.addEventListener("change", () => {
+  currentRate = null;
+  document.getElementById("manualRate").value = "";
+  updateVenezuelaRateVisibility();
+  updateAll();
+  fetchRate();
+});
+
+document.getElementById("venezuelaRateType")?.addEventListener("change", () => {
+  currentRate = null;
+  document.getElementById("manualRate").value = "";
+  markSelectedVenezuelaRate();
+  fetchRate();
+});
+
+productSelect.addEventListener("change", updateAll);
+document.getElementById("priceType")?.addEventListener("change", () => {
+  setPriceType(document.getElementById("priceType").value);
+});
+document.getElementById("qty").addEventListener("input", updateAll);
+document.getElementById("manualRate").addEventListener("input", () => {
+  if (Number(document.getElementById("manualRate").value) > 0) {
+    currentRate = Number(document.getElementById("manualRate").value);
+  }
+  updateAll();
+});
+document.getElementById("mode").addEventListener("change", updateMode);
+document.getElementById("condition").addEventListener("change", renderTreatmentInfo);
+document.getElementById("treatmentPriceType")?.addEventListener("change", () => {
+  setPriceType(document.getElementById("treatmentPriceType").value);
+});
+
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
+
+filterProducts();
+syncPriceRoleButtons();
+renderCart();
+renderTreatmentInfo();
+updateMode();
+updateVenezuelaRateVisibility();
+markSelectedVenezuelaRate();
+renderProductPreview();
+updateUsdPrice();
+fetchRate();
+</script>
+
+</body>
+</html>
