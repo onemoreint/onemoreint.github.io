@@ -174,7 +174,7 @@
       <button class="btn-danger" id="clearKeyBtn" type="button">🗑️ Borrar key</button>
     </div>
 
-    <div class="hint">💡 El modo demo genera contenido funcional sin API key. Con key real usa Claude 3.5 Sonnet.</div>
+    <div class="hint">💡 El modo demo genera contenido funcional sin API key. Con key real usa Claude Sonnet 5.5.</div>
   </section>
 
   <!-- PIPELINE -->
@@ -528,7 +528,7 @@ async function callAI(stage, apiKey){
       'anthropic-dangerous-direct-browser-access':'true'
     },
     body: JSON.stringify({
-      model:'claude-3-5-sonnet-latest',
+      model:'claude-sonnet-5-5',
       max_tokens: 1500,
       messages: [{ role:'user', content: prompts[stage.id] || prompts.strategy }]
     })
